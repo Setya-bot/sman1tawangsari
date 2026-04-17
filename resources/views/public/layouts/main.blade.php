@@ -39,15 +39,31 @@
             <!-- Menu Desktop -->
             <div class="hidden md:flex items-center gap-6">
                 <a href="{{ url('/') }}" class="hover:text-blue-600">Beranda</a>
-                <a href="{{ route('profile') }}" class="hover:text-blue-600">Profil</a>
-                <a href="#" class="hover:text-blue-600">Akademik</a>
-                <a href="#" class="hover:text-blue-600">Program</a>
+                <div class="relative group inline-block">
+                    <button class="flex items-center hover:text-blue-600 focus:outline-none">
+                        <span>Profil</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div class="absolute left-0 w-48 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <div class="py-1">
+                            <a href="{{ route('history') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Sejarah & Visi Misi</a>
+                            <a href="{{ route('gtk') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Guru & Tendik</a>
+                            <a href="{{ route('service') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Perpustakaan</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('studentship') }}" class="hover:text-blue-600">Kesiswaan</a>
+                <a href="{{ route('academic') }}" class="hover:text-blue-600">Akademik</a>
+                <a href="{{ route('gtk') }}" class="hover:text-blue-600">Guru & Tendik</a>
                 <a href="#" class="hover:text-blue-600">Galeri</a>
                 <a href="#" class="hover:text-blue-600">Berita</a>
                 <a href="#" class="hover:text-blue-600">PPDB 2026</a>
 
                 <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">
-                    Hubungi Kami
+                    Info PPDB
                 </a>
             </div>
 
@@ -58,14 +74,26 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden flex-col gap-4 py-4 md:hidden">
-            <a href="{{ url('/') }}">Beranda</a>
-            <a href="{{ route('profile') }}">Profil</a>
-            <a href="#">Akademik</a>
-            <a href="#">Program</a>
-            <a href="#">Galeri</a>
-            <a href="#">Berita</a>
-            <a href="#">PPDB 2026</a>
+        <div id="mobileMenu" class="hidden flex-col gap-2 py-4 md:hidden border-t border-gray-100 mt-2">
+            <a href="{{ url('/') }}" class="py-2 font-medium hover:text-blue-600">Beranda</a>
+            
+            <div class="flex flex-col">
+                <button onclick="toggleMobileDropdown('profileSub')" class="flex justify-between items-center py-2 font-medium hover:text-blue-600">
+                    <span>Profil</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="profileSub" class="hidden flex-col ml-4 border-l-2 border-blue-500 pl-4 gap-2 mb-2">
+                    <a href="{{ route('history') }}" class="py-1 text-sm text-gray-600">Sejarah</a>
+                    <a href="{{ route('gtk') }}" class="py-1 text-sm text-gray-600">Guru & Tendik</a>
+                    <a href="{{ route('service') }}" class="py-1 text-sm text-gray-600">Layanan</a>
+                </div>
+            </div>
+
+            <a href="{{ route('academic') }}" class="py-2 font-medium hover:text-blue-600">Akademik</a>
+            <a href="{{ route('studentship') }}" class="py-2 font-medium hover:text-blue-600">Kesiswaan</a>
+            <a href="#" class="py-2 font-medium hover:text-blue-600">Galeri</a>
+            <a href="#" class="py-2 font-medium hover:text-blue-600">Berita</a>
+            <a href="#" class="py-2 font-medium text-blue-600 font-bold">PPDB 2026</a>
         </div>
     </div>
 </nav>

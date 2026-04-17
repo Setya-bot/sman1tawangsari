@@ -19,11 +19,21 @@ class PublicController extends Controller
         return view('public.home', compact('profile', 'extras', 'carousels'));
     }
 
-    public function profile()
+    public function history()
     {
         $profile = SchoolProfile::first();
 
-        return view('public.profile', compact('profile'));
+        return view('public.history', compact('profile'));
+    }
+
+    public function service()
+    {
+        return view('public.service');
+    }
+
+    public function studentship()
+    {
+        return view('public.studentship');
     }
 
     public function ekstrakurikuler()
@@ -31,5 +41,14 @@ class PublicController extends Controller
         $extras = Extracurricular::latest()->get();
 
         return view('public.ekstrakurikuler', compact('extras'));
+    }
+
+    public function academic()
+    {
+        return view('public.academic');
+    }
+    public function gtk()
+    {
+        return view('public.gtk');
     }
 }

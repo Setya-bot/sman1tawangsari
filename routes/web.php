@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Route;
 // Redirect halaman depan ke login atau ke dashboard admin
 Route::get('/', [PublicController::class, 'home'])->name('home');
 // Route::get('/profile', [PublicController::class, 'profile'])->name('public.profile');
-Route::get('/profil', [PublicController::class, 'profile'])->name('profile');
+Route::get('/history', [PublicController::class, 'history'])->name('history');
+Route::get('/service', [PublicController::class, 'service'])->name('service');
+Route::get('/academic', [PublicController::class, 'academic'])->name('academic');
+Route::get('/studentship', [PublicController::class, 'studentship'])->name('studentship');
 Route::get('/ekstrakurikuler', [PublicController::class, 'ekstrakurikuler'])->name('public.ekstrakurikuler');
+Route::get('/gtk', [PublicController::class, 'gtk'])->name('gtk');
 // Route::get('/', function () {
 //     return redirect()->route('admin');
 // });
