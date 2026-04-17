@@ -105,23 +105,25 @@ class CarouselController extends Controller
     // 🔍 SEARCH AJAX
     public function search(Request $request)
     {
-        $search = $request->search;
+        $query = Carousel::query();
 
-        $data = Carousel::where('title', 'like', "%$search%")
-            ->orWhere('description', 'like', "%$search%")
-            ->orderBy('order')
-            ->get();
+        // Filter berdasarkan Search (Judul atau Deskripsi)
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%');
+            });
+        }
 
-        return response()->json($data->map(function ($item) {
-            return [
-                'id' => $item->id,
-                'title' => $item->title,
-                'description' => $item->description,
-                'image_url' => $item->image_url,
-                'link' => $item->link,
-                'order' => $item->order,
-                'is_active' => $item->is_active
-            ];
-        }));
+        // Filter berdasarkan Status
+        // Perhatikan: $request->status bisa bernilai "0" (string), jadi gunakan filled() atau manual check
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('is_active', $request->status);
+        }
+
+        $carousels = $query->latest()->get();
+
+        // Pastikan mengembalikan JSON dengan image_url (sesuai kebutuhan JS Anda)
+        return response()->json($carousels);
     }
 }

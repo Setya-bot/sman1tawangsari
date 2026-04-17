@@ -1,238 +1,264 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Carousel')
+@section('title', 'Manajemen Carousel')
 
 @section('content')
-<div class="content-wrapper-card">
-    <div class="card shadow-sm border-0 rounded-3">
 
-        <!-- Toolbar -->
-        <div class="card-header bg-light py-3">
-            <div class="d-flex justify-content-between align-items-center">
-
-                <!-- Search -->
-                <div class="input-group" style="max-width: 300px;">
-                    <span class="input-group-text bg-white">
-                        <i class="bi bi-search"></i>
-                    </span>
-                    <input type="text" id="search" class="form-control" placeholder="Cari ekstrakurikuler...">
+    <div class="max-w-8xl mx-auto">
+        <!-- Search & Filter -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 mb-6">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1 relative">
+                    <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <input type="text" 
+                           id="searchInput"
+                           placeholder="Cari berdasarkan judul atau deskripsi..." 
+                           class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-blue-500 transition">
                 </div>
-
-                <!-- Button -->
-                <a href="{{ route('carousels.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus"></i> Tambah
+                
+                <div class="flex items-center gap-3">
+                    <select id="statusFilter" class="px-8 py-3 bg-gray-50 border w-100 border-gray-200 rounded-2xl focus:outline-none">
+                        <option value="">Semua Status</option>
+                        <option value="1">Aktif</option>
+                        <option value="0">Nonaktif</option>
+                    </select>
+                </div>
+                <a href="{{ route('carousels.create') }}" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-2xl font-medium transition shadow-sm">
+                    <i class="fas fa-plus"></i>
+                    Tambah Carousel Baru
                 </a>
             </div>
         </div>
 
         <!-- Table -->
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <thead class="bg-light">
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <table class="w-full">
+                <thead class="bg-white-50">
                     <tr>
-                        <th class="ps-4 text-muted text-uppercase small fw-bold" style="width: 70px;">No</th>
-                        <th class="text-muted text-uppercase small fw-bold" style="width: 100px;">Judul</th>
-                        <th class="text-muted text-uppercase small fw-bold">Deskripsi</th>
-                        <th class="text-muted text-uppercase small fw-bold">Link</th>
-                        <th class="text-muted text-uppercase small fw-bold">Status</th>
-                        <th class="text-muted text-uppercase small fw-bold text-center pe-4" style="width: 50px;">Aksi</th>
+                        <th class="px-8 py-5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-16">No</th>
+                        <th class="px-6 py-5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Gambar</th>
+                        <th class="px-6 py-5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Judul</th>
+                        <th class="px-6 py-5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Deskripsi</th>
+                        <th class="px-6 py-5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Link</th>
+                        <th class="px-6 py-5 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-8 py-5 text-center text-xs font-semibold text-gray-500 uppercase tracking-wider w-32">Aksi</th>
                     </tr>
                 </thead>
-                <tbody id="carousel-table border-top-0">
+                <tbody id="carouselTableBody" class="divide-y divide-gray-100">
                     @forelse ($carousels as $key => $carousel)
-                    <tr>
-                        <td class="ps-4">
-                            <span class="text-secondary">{{ $carousels->firstItem() + $key }}</span>
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-8 py-6 text-gray-400 font-medium">
+                            {{ $carousels->firstItem() + $key }}
                         </td>
-                        <td>{{ $carousel->title }}</td>
-
-                        <td class="text-truncate" style="max-width:200px;">
-                            {{ $carousel->description ?? '-' }}
+                        <td class="px-6 py-6">
+                            <div class="w-20 h-14 bg-gray-100 rounded-2xl overflow-hidden border border-gray-200">
+                                @if($carousel->image)
+                                    <img src="{{ $carousel->image_url }}" 
+                                         alt="{{ $carousel->title }}" 
+                                         class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center text-gray-300">
+                                        <i class="fas fa-image text-2xl"></i>
+                                    </div>
+                                @endif
+                            </div>
                         </td>
-
-                        <td>
+                        <td class="px-6 py-6 font-medium text-gray-800">{{ $carousel->title }}</td>
+                        <td class="px-6 py-6 text-gray-600 text-sm max-w-xs">
+                            {{ Str::limit($carousel->description, 80) ?? '-' }}
+                        </td>
+                        <td class="px-6 py-6">
                             @if($carousel->link)
-                                <a href="{{ $carousel->link }}" target="_blank">Link</a>
-                            @else
-                                -
-                            @endif
-                        </td>
-
-                        <td>
-                            @if($carousel->is_active)
-                                <span class="badge bg-success">Aktif</span>
-                            @else
-                                <span class="badge bg-secondary">Nonaktif</span>
-                            @endif
-                        </td>
-                        <td class="text-end pe-4">
-                            <div class="btn-group">
-                                <a href="{{ route('carousels.edit', $carousel->id) }}" 
-                                class="btn btn-sm btn-light border text-primary" 
-                                data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa-solid fa-pen-to-square"></i>
+                                <a href="{{ $carousel->link }}" target="_blank" 
+                                   class="text-blue-600 hover:underline text-sm flex items-center gap-1">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <span>Link</span>
                                 </a>
-                                <form action="{{ route('carousels.destroy', $carousel->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" class="btn btn-sm btn-light border text-danger delete-btn" 
-                                            data-bs-toggle="tooltip" title="Hapus">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </form>
+                            @else
+                                <span class="text-gray-400">-</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-6 text-center">
+                            @if($carousel->is_active)
+                                <span class="inline-flex items-center px-4 py-1.5 rounded-2xl text-xs font-medium bg-emerald-100 text-emerald-700">
+                                    <span class="w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>
+                                    Aktif
+                                </span>
+                            @else
+                                <span class="inline-flex items-center px-4 py-1.5 rounded-2xl text-xs font-medium bg-gray-100 text-gray-600">
+                                    Nonaktif
+                                </span>
+                            @endif
+                        </td>
+                        <td class="px-8 py-6">
+                            <div class="flex justify-center gap-2">
+                                <a href="{{ route('carousels.edit', $carousel->id) }}" 
+                                   class="p-3 text-blue-600 hover:bg-blue-50 rounded-2xl transition">
+                                    <i class="fas fa-pen-to-square"></i>
+                                </a>
+                                <button onclick="deleteCarousel({{ $carousel->id }})" 
+                                        class="p-3 text-red-600 hover:bg-red-50 rounded-2xl transition">
+                                    <i class="fas fa-trash-can"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center py-5">
-                            <p class="text-muted">Belum ada data carousel.</p>
+                        <td colspan="7" class="text-center py-20 text-gray-400">
+                            <i class="fas fa-images text-6xl mb-4"></i>
+                            <p>Belum ada data carousel</p>
                         </td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
-        </div>
 
-        <!-- Pagination -->
-        <div class="card-footer">
-            {{ $carousels->links() }}
+            <!-- Pagination -->
+            <div class="px-8 py-5 border-t">
+                {{ $carousels->links() }}
+            </div>
         </div>
 
     </div>
-</div>
+@endsection
 
 @push('scripts')
 <script>
-const searchInput = document.getElementById('search');
-const tableBody = document.getElementById('carousel-table');
+    // Live Search
+    const searchInput = document.getElementById('searchInput');
+    const statusFilter = document.getElementById('statusFilter');
+    const tableBody = document.getElementById('carouselTableBody');
 
-function fetchcarousels() {
-    const search = searchInput.value;
+    let timeout;
 
-    fetch(`{{ route('carousels.search') }}?search=${search}`)
-        .then(res => res.json())
-        .then(data => {
-            let html = '';
+    function fetchCarousels() {
+        const search = searchInput.value;
+        const status = statusFilter.value;
 
-            if (data.length === 0) {
-                html = `<tr><td colspan="5" class="text-center">Tidak ada data</td></tr>`;
-            } else {
-                data.forEach((item, index) => {
-                    // Tentukan URL gambar
-                    const imgHtml = item.image 
-                        ? `<img src="${item.image_url}" class="w-100 h-100 object-fit-cover">`
-                        : `<div class="w-100 h-100 bg-light d-flex align-items-center justify-content-center"><i class="bi bi-image text-muted"></i></div>`;
+        fetch(`{{ route('carousels.search') }}?search=${encodeURIComponent(search)}&status=${status}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                let html = '';
 
-                    html += `
+                if (data.length === 0) {
+                    html = `
                         <tr>
-                            <td class="ps-4 text-secondary">${index + 1}</td>
-                            <td>${item.title ?? '-'}</td>
-                            <td>${item.description ?? '-'}</td>
-                            <td>${item.link ? `<a href="${item.link}" target="_blank">Link</a>` : '-'}</td>
-                            <td>
-                                ${item.is_active 
-                                    ? '<span class="badge bg-success">Aktif</span>' 
-                                    : '<span class="badge bg-secondary">Nonaktif</span>'}
+                            <td colspan="7" class="text-center py-16 text-gray-400">
+                                <i class="fas fa-search text-5xl mb-3"></i>
+                                <p>Tidak ditemukan data yang sesuai</p>
                             </td>
-                            <td class="text-end pe-4">
-                                <div class="btn-group">
-                                    <a href="/admin/carousels/${item.id}/edit" class="btn btn-sm btn-light border text-primary">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <form action="/admin/carousels/${item.id}" method="POST" class="d-inline">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="button" class="btn btn-sm btn-light border text-danger delete-btn">
-                                            <i class="fa-solid fa-trash-can"></i>
+                        </tr>`;
+                } else {
+                    data.forEach((item, index) => {
+                        const statusBadge = item.is_active 
+                            ? `<span class="inline-flex items-center px-4 py-1.5 rounded-2xl text-xs font-medium bg-emerald-100 text-emerald-700"><span class="w-2 h-2 bg-emerald-500 rounded-full mr-2 animate-pulse"></span>Aktif</span>`
+                            : `<span class="inline-flex items-center px-4 py-1.5 rounded-2xl text-xs font-medium bg-gray-100 text-gray-600">Nonaktif</span>`;
+
+                        const imageHtml = item.image_url 
+                            ? `<img src="${item.image_url}" class="w-20 h-14 object-cover rounded-2xl border border-gray-200">`
+                            : `<div class="w-20 h-14 bg-gray-100 rounded-2xl flex items-center justify-center text-gray-300"><i class="fas fa-image"></i></div>`;
+
+                        html += `
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="px-8 py-6 text-gray-400 font-medium">${index + 1}</td>
+                                <td class="px-6 py-6">${imageHtml}</td>
+                                <td class="px-6 py-6 font-medium">${item.title}</td>
+                                <td class="px-6 py-6 text-gray-600 text-sm">${item.description ? item.description.substring(0, 80) + '...' : '-'}</td>
+                                <td class="px-6 py-6">
+                                    ${item.link ? `<a href="${item.link}" target="_blank" class="text-blue-600 hover:underline">Link</a>` : '-'}
+                                </td>
+                                <td class="px-6 py-6 text-center">${statusBadge}</td>
+                                <td class="px-8 py-6">
+                                    <div class="flex justify-center gap-2">
+                                        <a href="/admin/carousels/${item.id}/edit" class="p-3 text-blue-600 hover:bg-blue-50 rounded-2xl transition">
+                                            <i class="fas fa-pen-to-square"></i>
+                                        </a>
+                                        <button onclick="deleteCarousel(${item.id})" class="p-3 text-red-600 hover:bg-red-50 rounded-2xl transition">
+                                            <i class="fas fa-trash-can"></i>
                                         </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
+                                    </div>
+                                </td>
+                            </tr>`;
+                    });
+                }
+                tableBody.innerHTML = html;
+            })
+            .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Debounce Search
+    searchInput.addEventListener('keyup', () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(fetchCarousels, 350);
+    });
+
+    statusFilter.addEventListener('change', fetchCarousels);
+
+    // Delete Function with SweetAlert
+    function deleteCarousel(id) {
+        Swal.fire({
+            title: 'Hapus Carousel?',
+            text: "Data ini akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Menghapus...',
+                    allowOutsideClick: false,
+                    didOpen: () => Swal.showLoading()
+                });
+
+                fetch(`/admin/carousels/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire('Terhapus!', data.message, 'success');
+                        fetchCarousels(); // Refresh table
+                    } else {
+                        Swal.fire('Gagal!', data.message || 'Terjadi kesalahan', 'error');
+                    }
                 });
             }
-
-            tableBody.innerHTML = html;
         });
-}
+    }
 
-let delay;
-searchInput.addEventListener('keyup', () => {
-    clearTimeout(delay);
-    delay = setTimeout(fetchcarousels, 400);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Logic untuk Tombol Hapus
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault(); 
-            const form = this.closest('form');
-            Swal.fire({
-                title: 'Hapus data?',
-                text: 'Data akan dihapus permanen!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Tampilkan loading
-                    Swal.fire({
-                        title: 'Menghapus...',
-                        text: 'Mohon tunggu sebentar',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
-                    
-                    // Submit form
-                    form.submit();
-                }
-            });
-        });
-    });
-    // 2. Logic Notifikasi Sukses (Create/Update/Delete)
+    // Notifikasi dari Session
     @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil!',
-            text: '{{ session('success') }}',
-            timer: 3000,
-            showConfirmButton: false
-        });
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: '{{ session('success') }}',
+        timer: 3000,
+        showConfirmButton: false
+    });
     @endif
-    // 3. Logic Notifikasi Error
+
     @if(session('error'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Gagal!',
-            text: '{{ session('error') }}',
-            timer: 3000,
-            showConfirmButton: false
-        });
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: '{{ session('error') }}',
+        timer: 4000
+    });
     @endif
-    
-    // 4. Logic Validasi Error (Jika input form salah)
-    @if($errors->any())
-        let errorList = '<ul style="text-align: left; margin-bottom: 0;">';
-        @foreach($errors->all() as $error)
-            errorList += '<li>{{ $error }}</li>';
-        @endforeach
-        errorList += '</ul>';
-        Swal.fire({
-            icon: 'error',
-            title: 'Validasi Gagal',
-            html: errorList
-        });
-    @endif
-});
 </script>
 @endpush
-@endsection

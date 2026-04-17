@@ -13,9 +13,6 @@
     @include('admin.partials.sidebar')
     {{-- Main Panel Wrapper --}}
     <main class="main-content">
-        <button id="mobileToggle" class="mobile-toggle-btn d-md-none">
-            ☰
-        </button>
         {{-- Top Navbar (Opsional) --}}
         <header class="top-header">
             <div class="header-left">
@@ -30,7 +27,9 @@
             @yield('content')
         </div>
         {{-- Footer --}}
-        @include('admin.partials.footer')
+        <div class="mt-10">
+            @include('admin.partials.footer')
+        </div>
     </main>
     </div>
     @stack('scripts') 

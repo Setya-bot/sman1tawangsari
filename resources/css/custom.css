@@ -112,13 +112,13 @@ body {
 
 /* Logout */
 .nav-link-logout {
-  color: #f87171 !important !important;
+  color: #f87171 !important;
   margin-top: auto !important;
 }
 
 .nav-link-logout:hover {
-  background: rgba(248, 113, 113, 0.12) !important !important;
-  color: #fca5a5 !important !important;
+  background: rgba(248, 113, 113, 0.12) !important;
+  color: #fca5a5 !important;
 }
 
 .sidebar-footer {
