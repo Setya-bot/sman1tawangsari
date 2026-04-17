@@ -1,0 +1,33 @@
+/* ===================== */
+/* MOBILE RESPONSIVE */
+/* ===================== */
+@media (max-width: 768px) {
+
+    .admin-sidebar {
+        transform: translateX(-100%);
+        width: 260px !important;
+        transition: transform 0.3s ease;
+    }
+
+    .admin-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+
+    /* tombol floating */
+    .mobile-toggle-btn {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1100;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+}
