@@ -5,246 +5,239 @@
 @section('content')
 
     <!-- ==================== HERO CAROUSEL ==================== -->
-    <div id="heroCarousel" 
-     class="carousel slide hero-carousel" 
-     data-bs-ride="carousel" 
-     data-bs-interval="5000"
-     data-bs-pause="false">
-
-    <!-- INDICATORS -->
-    <div class="carousel-indicators">
-        @foreach($carousels as $key => $carousel)
-            <button type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide-to="{{ $key }}"
-                class="{{ $key == 0 ? 'active' : '' }}"
-                aria-current="{{ $key == 0 ? 'true' : 'false' }}">
-            </button>
-        @endforeach
-    </div>
+<div x-data="{ active: 0 }" class="relative w-full h-screen overflow-hidden">
 
     <!-- SLIDES -->
-    <div class="carousel-inner">
-        @foreach($carousels as $key => $carousel)
-        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-            
-            <!-- IMAGE -->
-            <div class="carousel-bg"
-                 style="background-image: url('{{ $carousel->image_url }}');">
-            </div>
+    @foreach($carousels as $key => $carousel)
+    <div x-show="active === {{ $key }}" 
+         x-transition
+         class="absolute inset-0">
 
-            <!-- OVERLAY -->
-            <div class="carousel-overlay"></div>
-
-            <!-- CONTENT -->
-            <div class="carousel-caption text-center text-white">
-                <h1 class="display-3">
-                    {{ $carousel->title ?? $profile->school_name }}
-                </h1>
-
-                <p class="lead fs-3 mb-4">
-                    {{ $carousel->description ?? $profile->motto }}
-                </p>
-
-                @if($carousel->link)
-                    <a href="{{ $carousel->link }}" 
-                       class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-semibold">
-                        Lihat Selengkapnya
-                    </a>
-                @endif
-            </div>
-
+        <!-- Background -->
+        <div class="absolute inset-0 bg-cover bg-center"
+             style="background-image: url('{{ asset("storage/{$carousel->image_url}") }}')">
         </div>
-        @endforeach
-    </div>
 
-    <!-- CONTROL -->
-    <button class="carousel-control-pre" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/60"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                {{ $carousel->title ?? $profile->school_name }}
+            </h1>
+
+            <p class="text-lg md:text-2xl mb-6">
+                {{ $carousel->description ?? $profile->motto }}
+            </p>
+
+            @if($carousel->link)
+            <a href="{{ $carousel->link }}"
+               class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200">
+                Lihat Selengkapnya
+            </a>
+            @endif
+        </div>
+    </div>
+    @endforeach
+
+    <!-- BUTTON -->
+    <button @click="active = (active - 1 + {{ count($carousels) }}) % {{ count($carousels) }}"
+        class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl">
+        ‹
     </button>
 
-    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
+    <button @click="active = (active + 1) % {{ count($carousels) }}"
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl">
+        ›
     </button>
 
 </div>
 
-    <!-- ==================== SAMBUTAN KEPALA SEKOLAH ==================== -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-4 text-center">
-                    <img src="{{ $profile->principal_photo 
-                        ? asset('storage/'.$profile->principal_photo) 
-                        : 'https://source.unsplash.com/500x500/?man,teacher' }}"
-                    class="rounded-circle shadow-lg"
-                    width="280"
-                    alt="Kepala Sekolah">
-                    <h4 class="mt-4">
-                        {{ $profile->principal_name ?? 'Nama Kepala Sekolah' }}
-                    </h4>
-                    <p class="text-muted">Kepala Sekolah</p>
-                </div>
-                <div class="col-lg-8">
-                    <h2 class="section-title mb-4">Sambutan Kepala Sekolah</h2>
-                    <p class="lead">
-                        Assalamu'alaikum Wr. Wb.<br><br>
-                        Selamat datang di website resmi SMA Negeri 1 Yogyakarta. 
-                        Sebagai sekolah teladan, kami berkomitmen memberikan pendidikan holistik yang unggul secara akademik sekaligus membentuk karakter siswa yang berakhlak mulia, kreatif, dan siap menghadapi tantangan masa depan.
-                    </p>
-                    <p>Kami mengundang seluruh calon siswa dan orang tua untuk bergabung bersama kami dalam mewujudkan generasi emas bangsa.</p>
-                    <p class="fw-bold mt-4">Wassalamu'alaikum Wr. Wb.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ==================== SAMBUTAN ==================== -->
+<section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
 
-    <!-- ==================== VISI & MISI ==================== -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6">
-                    <div class="card h-100 p-5 shadow-sm">
-                        <h3 class="text-primary mb-4"><i class="fas fa-eye fa-2x"></i> Visi</h3>
-                        <p class="fs-5">
-                            Menjadi sekolah unggulan nasional yang menghasilkan lulusan beriman, bertakwa, berprestasi, 
-                            berwawasan global, dan berkontribusi positif bagi masyarakat pada tahun 2035.
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card h-100 p-5 shadow-sm">
-                        <h3 class="text-primary mb-4"><i class="fas fa-bullseye fa-2x"></i> Misi</h3>
-                        <ul class="list-unstyled fs-5">
-                            <li class="mb-3">• Menyelenggarakan pendidikan berkualitas berbasis karakter dan teknologi</li>
-                            <li class="mb-3">• Mengembangkan seluruh potensi siswa secara optimal</li>
-                            <li class="mb-3">• Membangun kerjasama sinergis dengan orang tua, alumni, dan masyarakat</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- FOTO -->
+        <div class="text-center">
+            <img src="{{ $profile->principal_photo 
+                ? asset('storage/'.$profile->principal_photo) 
+                : 'https://source.unsplash.com/500x500/?man,teacher' }}"
+                class="w-60 h-60 mx-auto rounded-full object-cover shadow-xl">
 
-    <!-- ==================== PROGRAM UNGGULAN ==================== -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">Program Unggulan</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 text-center p-4">
-                        <i class="fas fa-laptop-code fa-4x text-primary mb-4"></i>
-                        <h5 class="fw-bold">STEM & Coding Academy</h5>
-                        <p class="mt-3">Program sains, teknologi, engineering, matematika, dan pemrograman tingkat lanjut.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 text-center p-4">
-                        <i class="fas fa-globe-asia fa-4x text-success mb-4"></i>
-                        <h5 class="fw-bold">International Class</h5>
-                        <p class="mt-3">Kelas internasional dengan kurikulum Cambridge dan program pertukaran siswa.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 text-center p-4">
-                        <i class="fas fa-palette fa-4x text-warning mb-4"></i>
-                        <h5 class="fw-bold">Arts & Leadership</h5>
-                        <p class="mt-3">Pengembangan seni, musik, tari tradisional, dan kepemimpinan siswa.</p>
-                    </div>
-                </div>
-            </div>
+            <h4 class="mt-5 text-xl font-bold">
+                {{ $profile->principal_name ?? 'Nama Kepala Sekolah' }}
+            </h4>
+            <p class="text-gray-500">Kepala Sekolah</p>
         </div>
-    </section>
 
-    <!-- ==================== STATISTIK ==================== -->
-    <section class="py-5 text-white" style="background: linear-gradient(135deg, #0d6efd, #00c4a7);">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-3 col-6 mb-5">
-                    <div class="stat-number fs-1 fw-bold">1,280</div>
-                    <p class="fs-5 mt-2">Siswa Aktif</p>
-                </div>
-                <div class="col-md-3 col-6 mb-5">
-                    <div class="stat-number fs-1 fw-bold">92</div>
-                    <p class="fs-5 mt-2">Guru & Staff</p>
-                </div>
-                <div class="col-md-3 col-6 mb-5">
-                    <div class="stat-number fs-1 fw-bold">98%</div>
-                    <p class="fs-5 mt-2">Tingkat Kelulusan</p>
-                </div>
-                <div class="col-md-3 col-6 mb-5">
-                    <div class="stat-number fs-1 fw-bold">45</div>
-                    <p class="fs-5 mt-2">Prestasi Nasional 2025</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- TEXT -->
+        <div>
+            <h2 class="text-3xl font-bold mb-4 border-b-4 border-blue-500 inline-block pb-2">
+                Sambutan Kepala Sekolah
+            </h2>
 
-    <!-- ==================== TESTIMONI ==================== -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">Apa Kata Mereka</h2>
-            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active text-center">
-                        <p class="fs-4 fst-italic mx-auto" style="max-width: 700px;">
-                            "SMA N 1 Yogyakarta bukan hanya sekolah biasa. Di sini saya dibentuk menjadi pribadi disiplin, berprestasi, dan siap menghadapi dunia perkuliahan."
-                        </p>
-                        <p class="mt-4 fw-bold">— Rina Wijaya, Alumni 2024 (Mahasiswa Universitas Indonesia)</p>
-                    </div>
-                    <div class="carousel-item text-center">
-                        <p class="fs-4 fst-italic mx-auto" style="max-width: 700px;">
-                            "Fasilitas modern dan guru yang berkualitas membuat anak kami semakin percaya diri. Sangat direkomendasikan untuk orang tua yang menginginkan pendidikan terbaik."
-                        </p>
-                        <p class="mt-4 fw-bold">— Bapak Andi Pratama, Orang Tua Siswa Kelas XI</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <p class="text-lg leading-relaxed">
+                Assalamu'alaikum Wr. Wb.<br><br>
+                Selamat datang di website resmi sekolah kami. Kami berkomitmen
+                memberikan pendidikan terbaik berbasis karakter dan prestasi.
+            </p>
 
-    <!-- ==================== GALERI ==================== -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">Galeri Sekolah</h2>
-            <div class="row g-3">
-                <div class="col-md-4"><img src="https://source.unsplash.com/800x600/?school,students" class="gallery-img img-fluid w-100 shadow" alt=""></div>
-                <div class="col-md-4"><img src="https://source.unsplash.com/800x600/?classroom,modern" class="gallery-img img-fluid w-100 shadow" alt=""></div>
-                <div class="col-md-4"><img src="https://source.unsplash.com/800x600/?lab,science" class="gallery-img img-fluid w-100 shadow" alt=""></div>
-                <div class="col-md-4"><img src="https://source.unsplash.com/800x600/?sport,field" class="gallery-img img-fluid w-100 shadow" alt=""></div>
-                <div class="col-md-4"><img src="https://source.unsplash.com/800x600/?graduation" class="gallery-img img-fluid w-100 shadow" alt=""></div>
-                <div class="col-md-4"><img src="https://source.unsplash.com/800x600/?event,school" class="gallery-img img-fluid w-100 shadow" alt=""></div>
-            </div>
+            <p class="mt-4">
+                Kami mengundang seluruh calon siswa untuk bergabung bersama kami.
+            </p>
         </div>
-    </section>
 
-    <!-- ==================== BERITA TERBARU ==================== -->
-    <section class="py-5">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">Berita & Pengumuman</h2>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
-                        <img src="https://source.unsplash.com/600x400/?news,education" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <small class="text-muted">16 April 2026</small>
-                            <h5 class="card-title mt-3">Pengumuman Jadwal PPDB Tahun Pelajaran 2026/2027</h5>
-                            <p class="card-text">Pendaftaran PPDB akan dibuka mulai 1 Mei 2026. Siapkan dokumen lengkap dan pantau informasi terbaru di website ini.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100">
-                        <img src="https://source.unsplash.com/600x400/?award,student" class="card-img-top" alt="">
-                        <div class="card-body">
-                            <small class="text-muted">14 April 2026</small>
-                            <h5 class="card-title mt-3">Tim Debat SMA N 1 Juara 1 Tingkat Provinsi DIY</h5>
-                            <p class="card-text">Selamat kepada tim debat yang berhasil meraih juara pertama di kompetisi debat tingkat provinsi.</p>
-                        </div>
-                    </div>
+    </div>
+</section>
+
+
+<!-- ==================== VISI MISI ==================== -->
+<section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-8">
+
+        <!-- VISI -->
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition">
+            <h3 class="text-blue-600 text-2xl font-bold mb-4">Visi</h3>
+            <p class="text-gray-700">
+                Menjadi sekolah unggulan nasional yang menghasilkan lulusan
+                beriman, berprestasi, dan berwawasan global.
+            </p>
+        </div>
+
+        <!-- MISI -->
+        <div class="bg-white p-8 rounded-2xl shadow hover:shadow-lg transition">
+            <h3 class="text-blue-600 text-2xl font-bold mb-4">Misi</h3>
+            <ul class="space-y-3 text-gray-700">
+                <li>• Pendidikan berbasis karakter & teknologi</li>
+                <li>• Mengembangkan potensi siswa</li>
+                <li>• Kerjasama dengan masyarakat</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ==================== PROGRAM ==================== -->
+<section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+
+        <h2 class="text-3xl font-bold mb-10">Program Unggulan</h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="bg-white p-6 rounded-2xl shadow hover:-translate-y-2 transition">
+                <i class="fas fa-laptop-code text-4xl text-blue-500 mb-4"></i>
+                <h5 class="font-bold text-lg">STEM & Coding</h5>
+                <p class="text-gray-600 mt-2">Program teknologi & pemrograman</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow hover:-translate-y-2 transition">
+                <i class="fas fa-globe-asia text-4xl text-green-500 mb-4"></i>
+                <h5 class="font-bold text-lg">International Class</h5>
+                <p class="text-gray-600 mt-2">Kurikulum internasional</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow hover:-translate-y-2 transition">
+                <i class="fas fa-palette text-4xl text-yellow-500 mb-4"></i>
+                <h5 class="font-bold text-lg">Arts & Leadership</h5>
+                <p class="text-gray-600 mt-2">Seni & kepemimpinan</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ==================== STATISTIK ==================== -->
+<section class="py-16 bg-gradient-to-r from-blue-600 to-teal-400 text-white">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 text-center gap-8">
+
+        <div>
+            <div class="text-4xl font-bold">1,280</div>
+            <p>Siswa Aktif</p>
+        </div>
+
+        <div>
+            <div class="text-4xl font-bold">92</div>
+            <p>Guru & Staff</p>
+        </div>
+
+        <div>
+            <div class="text-4xl font-bold">98%</div>
+            <p>Kelulusan</p>
+        </div>
+
+        <div>
+            <div class="text-4xl font-bold">45</div>
+            <p>Prestasi</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ==================== TESTIMONI ==================== -->
+<section class="py-16">
+    <div class="max-w-3xl mx-auto text-center px-4">
+
+        <h2 class="text-3xl font-bold mb-8">Apa Kata Mereka</h2>
+
+        <p class="text-lg italic">
+            "Sekolah ini membentuk saya menjadi pribadi disiplin dan siap kuliah."
+        </p>
+        <p class="mt-4 font-semibold">
+            — Alumni 2024
+        </p>
+
+    </div>
+</section>
+
+
+<!-- ==================== GALERI ==================== -->
+<section class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+
+        <h2 class="text-3xl font-bold text-center mb-10">Galeri</h2>
+
+        <div class="grid md:grid-cols-3 gap-4">
+            <img src="https://source.unsplash.com/800x600/?school" class="rounded-xl shadow hover:scale-105 transition">
+            <img src="https://source.unsplash.com/800x600/?classroom" class="rounded-xl shadow hover:scale-105 transition">
+            <img src="https://source.unsplash.com/800x600/?students" class="rounded-xl shadow hover:scale-105 transition">
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ==================== BERITA ==================== -->
+<section class="py-16">
+    <div class="max-w-7xl mx-auto px-4">
+
+        <h2 class="text-3xl font-bold text-center mb-10">Berita</h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="bg-white rounded-2xl shadow overflow-hidden">
+                <img src="https://source.unsplash.com/600x400/?news" class="w-full">
+                <div class="p-4">
+                    <small class="text-gray-500">16 April 2026</small>
+                    <h5 class="font-bold mt-2">PPDB Dibuka</h5>
                 </div>
             </div>
+
+            <div class="bg-white rounded-2xl shadow overflow-hidden">
+                <img src="https://source.unsplash.com/600x400/?student" class="w-full">
+                <div class="p-4">
+                    <small class="text-gray-500">14 April 2026</small>
+                    <h5 class="font-bold mt-2">Juara Debat</h5>
+                </div>
+            </div>
+
         </div>
-    </section>
+
+    </div>
+</section>
 
 @endsection
