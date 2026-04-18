@@ -43,6 +43,20 @@ class PublicController extends Controller
         return view('public.ekstrakurikuler', compact('extras'));
     }
 
+    public function detailEkstrakurikuler($id)
+    {
+        $profile = SchoolProfile::first();
+
+        $extra = Extracurricular::findOrFail($id);
+
+        $others = Extracurricular::where('id', '!=', $id)
+                    ->latest()
+                    ->take(3)
+                    ->get();
+
+        return view('public.ekstrakurikuler_detail', compact('profile', 'extra', 'others'));
+    }
+
     public function academic()
     {
         return view('public.academic');

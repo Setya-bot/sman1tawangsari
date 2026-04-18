@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - SMA Negeri 1 Yogyakarta</title>
+    <title>@yield('title') - SMA Negeri 1 Tawangsari</title>
 
     @vite('resources/css/app.css')
 
@@ -49,18 +49,49 @@
 
                     <div class="absolute left-0 w-48 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                         <div class="py-1">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Kata Sambutan</a>
                             <a href="{{ route('history') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Sejarah & Visi Misi</a>
                             <a href="{{ route('gtk') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Guru & Tendik</a>
-                            <a href="{{ route('service') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Perpustakaan</a>
+                            <a href="{{ route('service') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Layanan</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Struktur Organisasi</a>
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('studentship') }}" class="hover:text-blue-600">Kesiswaan</a>
-                <a href="{{ route('academic') }}" class="hover:text-blue-600">Akademik</a>
-                <a href="{{ route('gtk') }}" class="hover:text-blue-600">Guru & Tendik</a>
+                <div class="relative group inline-block">
+                    <button class="flex items-center hover:text-blue-600 focus:outline-none">
+                        <span>Program</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div class="absolute left-0 w-48 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <div class="py-1">
+                            <a href="{{ route('studentship') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Kesiswaan</a>
+                            <a href="{{ route('academic') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Akademik</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Sarana Prasarana</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative group inline-block">
+                    <button class="flex items-center hover:text-blue-600 focus:outline-none">
+                        <span>Siswa</span>
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div class="absolute left-0 w-48 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <div class="py-1">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">SPMB 2026</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Alumni</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Prestasi</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('ekstrakurikuler') }}" class="hover:text-blue-600">Ekstrakurikuler</a>
                 <a href="#" class="hover:text-blue-600">Galeri</a>
                 <a href="#" class="hover:text-blue-600">Berita</a>
-                <a href="#" class="hover:text-blue-600">PPDB 2026</a>
 
                 <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">
                     Info PPDB
@@ -83,12 +114,14 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="profileSub" class="hidden flex-col ml-4 border-l-2 border-blue-500 pl-4 gap-2 mb-2">
+                    <a href="#" class="py-1 text-sm text-gray-600">Kata Sambutan</a>
                     <a href="{{ route('history') }}" class="py-1 text-sm text-gray-600">Sejarah</a>
                     <a href="{{ route('gtk') }}" class="py-1 text-sm text-gray-600">Guru & Tendik</a>
                     <a href="{{ route('service') }}" class="py-1 text-sm text-gray-600">Layanan</a>
+                    <a href="#" class="py-1 text-sm text-gray-600">Struktur Organisasi</a>
                 </div>
             </div>
-
+            
             <a href="{{ route('academic') }}" class="py-2 font-medium hover:text-blue-600">Akademik</a>
             <a href="{{ route('studentship') }}" class="py-2 font-medium hover:text-blue-600">Kesiswaan</a>
             <a href="#" class="py-2 font-medium hover:text-blue-600">Galeri</a>
@@ -108,14 +141,14 @@
     <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8">
 
         <div>
-            <h5 class="font-bold text-lg mb-3">SMA Negeri 1 Yogyakarta</h5>
+            <h5 class="font-bold text-lg mb-3">SMA Negeri 1 Tawangsari</h5>
             <p class="text-sm">
                 Jl. HOS Cokroaminoto No. 10<br>
-                Yogyakarta 55253
+                Tawangsari 55253
             </p>
             <p class="text-sm mt-2">
                 Telp: (0274) 513454<br>
-                Email: humas@sman1yogya.sch.id
+                Email: humas@sman1tawangsari.sch.id
             </p>
         </div>
 
@@ -150,7 +183,7 @@
     </div>
 
     <div class="text-center text-sm border-t border-gray-700 py-4">
-        &copy; 2026 SMA Negeri 1 Yogyakarta • All Rights Reserved
+        &copy; 2026 SMA Negeri 1 Tawangsari • All Rights Reserved
     </div>
 </footer>
 
