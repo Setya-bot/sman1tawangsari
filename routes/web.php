@@ -20,6 +20,7 @@ Route::get('/ekstrakurikuler', [PublicController::class, 'ekstrakurikuler'])->na
 Route::get('/ekstrakurikuler/{id}', [PublicController::class, 'detailEkstrakurikuler'])
     ->name('ekstrakurikuler.detail');
 Route::get('/gtk', [PublicController::class, 'gtk'])->name('gtk');
+Route::get('/opening', [PublicController::class, 'opening'])->name('opening');
 // Route::get('/', function () {
 //     return redirect()->route('admin');
 // });

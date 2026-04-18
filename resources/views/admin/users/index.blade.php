@@ -3,269 +3,244 @@
 @section('title', 'Manajemen Pengguna')
 
 @section('content')
-<!-- <div class="container-fluid"> -->
-<div class="content-wrapper-card">
-    <!-- Card Utama -->
-    <div class="card shadow-sm border-0 rounded-3">
-        <!-- Toolbar -->
-        <div class="card-header bg-light py-3">
-            <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
 
-                <!-- Kiri: Search + Filter -->
-                <div class="d-flex gap-2 flex-wrap" style="flex:1;">
-                    <div class="input-group" style="max-width: 300px;">
-                        <span class="input-group-text bg-white">
-                            <i class="bi bi-search"></i>
-                        </span>
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Cari...">
+    <div class="max-w-8xl mx-auto">
+        <div class="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-6 mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-5">
+                
+                <div class="flex flex-1 flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    <div class="relative group flex-1">
+                        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <input type="text" 
+                               id="search"
+                               placeholder="Cari nama atau email pengguna..." 
+                               class="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/5 transition-all text-sm">
                     </div>
 
-                    <select id="role-filter" name="role" class="form-select" style="max-width: 180px;">
+                    <select id="role-filter" 
+                            class="bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block p-3.5 transition-all outline-none">
                         <option value="">Semua Role</option>
                         <option value="admin">Admin</option>
                         <option value="editor">Editor</option>
                     </select>
                 </div>
-
-                <!-- Kanan: Button -->
-                <div class="d-flex gap-2">
-                    <button onclick="exportUsers()" class="btn btn-outline-secondary">
-                        <i class="bi bi-download"></i>
+                
+                <div class="flex gap-3 w-full md:w-auto">
+                    <button onclick="exportUsers()" 
+                            class="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-600 px-5 py-3.5 rounded-2xl font-bold transition-all active:scale-95 text-sm">
+                        <i class="fas fa-download"></i>
                     </button>
 
-                    <a href="{{ route('users.create') }}" class="btn btn-primary">
-                        <i class="bi bi-plus"></i> Tambah
+                    <a href="{{ route('users.create') }}" 
+                       class="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-2xl font-bold transition-all shadow-lg shadow-blue-600/20 active:scale-95 text-sm">
+                        <i class="fas fa-user-plus"></i>
+                        Tambah Pengguna
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Table -->
-        <div class="table-responsive">
-            <table class="table table-hover align-middle mb-0">
-                <!-- <thead class="table-light">
-                    <tr>
-                        <th class="ps-4" style="width: 60px;">No</th>
-                        <th>Pengguna</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th class="text-end pe-4">Aksi</th>
-                    </tr>
-                </thead> -->
-                <thead class="bg-light">
-                    <tr>
-                        <th class="ps-4 text-muted text-uppercase small fw-bold" style="width: 70px;">No</th>
-                        <th class="text-muted text-uppercase small fw-bold" style="width: 100px;">Pengguna</th>
-                        <th class="text-muted text-uppercase small fw-bold">Email</th>
-                        <th class="text-muted text-uppercase small fw-bold">Role</th>
-                        <th class="text-muted text-uppercase small fw-bold text-center pe-4" style="width: 50px;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="user-table">
-                    @foreach ($users as $key => $user)
-                    <tr>
-                        <td class="ps-4 text-muted">{{ $key + 1 }}</td>
-                        
-                        <td>
-                            <div class="d-flex align-items-center gap-3">
-                                <div class="fw-medium">{{ $user->name }}</div>
-                            </div>
-                        </td>
-                        
-                        <td class="text-muted">{{ $user->email }}</td>
-                        
-                        <td>
-                            @if($user->role == 'admin')
-                                <span class="badge bg-purple">Admin</span>
-                            @elseif($user->role == 'editor')
-                                <span class="badge bg-warning text-dark">Editor</span>
-                            @else
-                                <span class="badge bg-success">User</span>
-                            @endif
-                        </td>
-                        
-                        <td class="text-end pe-4">
-                            <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ route('users.edit', $user->id) }}" 
-                                   class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                            class="btn btn-sm btn-outline-danger delete-btn">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="card-footer bg-light d-flex justify-content-between align-items-center py-3">
-            <div class="text-muted small">
-                Menampilkan {{ $users->firstItem() ?? 1 }} - {{ $users->lastItem() ?? $users->count() }} 
-                dari {{ $users->total() ?? $users->count() }} data
+        <div class="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50/50">
+                            <th class="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em] w-20 text-center">No</th>
+                            <th class="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em]">Informasi Pengguna</th>
+                            <th class="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em]">Email</th>
+                            <th class="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em]">Role</th>
+                            <th class="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em] text-center w-40">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table" class="divide-y divide-gray-100">
+                        @forelse ($users as $key => $user)
+                        <tr class="hover:bg-gray-50/80 transition-colors group">
+                            <td class="px-8 py-6 text-center text-gray-400 font-medium text-sm">
+                                {{ $users->firstItem() + $key }}
+                            </td>
+                            <td class="px-6 py-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="font-bold text-gray-800 text-base group-hover:text-blue-600 transition-colors">
+                                        {{ $user->name }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-6">
+                                <span class="text-gray-500 text-sm">{{ $user->email }}</span>
+                            </td>
+                            <td class="px-6 py-6">
+                                @if($user->role == 'admin')
+                                    <span class="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-purple-100 text-purple-600 rounded-lg">Admin</span>
+                                @elseif($user->role == 'editor')
+                                    <span class="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-600 rounded-lg">Editor</span>
+                                @else
+                                    <span class="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-600 rounded-lg">User</span>
+                                @endif
+                            </td>
+                            <td class="px-8 py-6">
+                                <div class="flex justify-center items-center gap-2">
+                                    <a href="{{ route('users.edit', $user->id) }}" 
+                                       class="w-10 h-10 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm"
+                                       title="Edit">
+                                        <i class="fas fa-pen-to-square"></i>
+                                    </a>
+                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" 
+                                                class="w-10 h-10 flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm delete-btn" 
+                                                title="Hapus">
+                                            <i class="fas fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center py-24">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="w-32 h-32 bg-gray-50 rounded-full flex items-center justify-center mb-6">
+                                        <i class="fas fa-users-slash text-5xl text-gray-200"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-1">Data Kosong</h3>
+                                    <p class="text-gray-400 text-sm">Belum ada data pengguna yang terdaftar.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
-            <div>
-                {{ $users->links() }}
-            </div>
-        </div>
 
+            @if($users->hasPages())
+                <div class="px-8 py-6 bg-gray-50/50 border-t border-gray-100">
+                    {{ $users->links() }}
+                </div>
+            @endif
+        </div>
     </div>
-</div>
+
 @endsection
 
 @push('scripts')
-    <!-- WAJIB: Load Library SweetAlert2 dari CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const searchInput = document.getElementById('search');
+    const roleFilter = document.getElementById('role-filter');
+    const tableBody = document.getElementById('user-table');
 
-    <script>
+    function fetchUsers() {
+        const search = searchInput.value;
+        const role = roleFilter.value;
 
-        const searchInput = document.getElementById('search');
-        const roleFilter = document.getElementById('role-filter');
-        const tableBody = document.getElementById('user-table');
+        fetch(`{{ route('users.search') }}?search=${encodeURIComponent(search)}&role=${role}`)
+            .then(res => res.json())
+            .then(data => {
+                let html = '';
 
-        function fetchUsers() {
-            const search = searchInput.value;
-            const role = roleFilter.value;
-
-            fetch(`{{ route('users.search') }}?search=${search}&role=${role}`)
-                .then(res => res.json())
-                .then(data => {
-                    let html = '';
-
-                    if (data.length === 0) {
-                        html = `<tr><td colspan="5" class="text-center text-muted py-4">Tidak ada data</td></tr>`;
-                    } else {
-                        data.forEach((user, index) => {
-                            html += `
-                                <tr>
-                                    <td class="ps-4 text-muted">${index + 1}</td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="fw-medium">${user.name}</div>
-                                        </div>
-                                    </td>
-                                    <td class="text-muted">${user.email}</td>
-                                    <td>
-                                        ${user.role === 'admin' 
-                                            ? '<span class="badge bg-purple">Admin</span>' 
-                                            : '<span class="badge bg-warning text-dark">Editor</span>'}
-                                    </td>
-                                    <td class="text-end pe-4">
-                                        <div class="d-flex justify-content-end gap-2">
-                                            <a href="/admin/users/${user.id}/edit" class="btn btn-sm btn-outline-primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <form action="/admin/users/${user.id}" method="POST" class="d-inline delete-form">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger delete-btn">
-                                                    <i class="bi bi-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            `;
-                        });
-                    }
-
-                    tableBody.innerHTML = html;
-                });
-        }
-
-        let delay;
-        function debounceFetch() {
-            clearTimeout(delay);
-            delay = setTimeout(fetchUsers, 400);
-        }
-
-        searchInput.addEventListener('keyup', debounceFetch);
-        roleFilter.addEventListener('change', fetchUsers);
-
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. Logic untuk Tombol Hapus
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault(); 
-
-                    const form = this.closest('form');
-
-                    Swal.fire({
-                        title: 'Apakah Anda yakin?',
-                        text: "Data pengguna ini akan dihapus permanen!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#6c757d',
-                        confirmButtonText: 'Ya, hapus!',
-                        cancelButtonText: 'Batal'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Tampilkan loading
-                            Swal.fire({
-                                title: 'Menghapus...',
-                                text: 'Mohon tunggu sebentar',
-                                allowOutsideClick: false,
-                                didOpen: () => {
-                                    Swal.showLoading();
-                                }
-                            });
-                            
-                            // Submit form
-                            form.submit();
+                if (data.length === 0) {
+                    html = `
+                        <tr>
+                            <td colspan="5" class="text-center py-24">
+                                <div class="flex flex-col items-center justify-center">
+                                    <i class="fas fa-search text-5xl text-gray-100 mb-4"></i>
+                                    <p class="text-gray-400">Tidak ada pengguna yang cocok</p>
+                                </div>
+                            </td>
+                        </tr>`;
+                } else {
+                    data.forEach((user, index) => {
+                        let roleBadge = '';
+                        if(user.role === 'admin') {
+                            roleBadge = '<span class="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-purple-100 text-purple-600 rounded-lg">Admin</span>';
+                        } else if(user.role === 'editor') {
+                            roleBadge = '<span class="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-600 rounded-lg">Editor</span>';
+                        } else {
+                            roleBadge = '<span class="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-600 rounded-lg">User</span>';
                         }
+
+                        html += `
+                            <tr class="hover:bg-gray-50/80 transition-colors group">
+                                <td class="px-8 py-6 text-center text-gray-400 font-medium text-sm">${index + 1}</td>
+                                <td class="px-6 py-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="font-bold text-gray-800 text-base group-hover:text-blue-600 transition-colors">${user.name}</div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-6">
+                                    <span class="text-gray-500 text-sm">${user.email}</span>
+                                </td>
+                                <td class="px-6 py-6">${roleBadge}</td>
+                                <td class="px-8 py-6">
+                                    <div class="flex justify-center items-center gap-2">
+                                        <a href="/admin/users/${user.id}/edit" class="w-10 h-10 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm">
+                                            <i class="fas fa-pen-to-square"></i>
+                                        </a>
+                                        <form action="/admin/users/${user.id}" method="POST" class="inline">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="button" class="w-10 h-10 flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm delete-btn">
+                                                <i class="fas fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
                     });
-                });
+                }
+                tableBody.innerHTML = html;
             });
+    }
 
-            // 2. Logic Notifikasi Sukses (Create/Update/Delete)
-            @if(session('success'))
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil!',
-                    text: '{{ session('success') }}',
-                    timer: 3000,
-                    showConfirmButton: false
-                });
-            @endif
+    let delay;
+    searchInput.addEventListener('keyup', () => {
+        clearTimeout(delay);
+        delay = setTimeout(fetchUsers, 350);
+    });
 
-            // 3. Logic Notifikasi Error
-            @if(session('error'))
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal!',
-                    text: '{{ session('error') }}',
-                    timer: 3000,
-                    showConfirmButton: false
-                });
-            @endif
+    roleFilter.addEventListener('change', fetchUsers);
+
+    // SweetAlert Delete
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.delete-btn')) {
+            const button = e.target.closest('.delete-btn');
+            const form = button.closest('form');
             
-            // 4. Logic Validasi Error (Jika input form salah)
-            @if($errors->any())
-                let errorList = '<ul style="text-align: left; margin-bottom: 0;">';
-                @foreach($errors->all() as $error)
-                    errorList += '<li>{{ $error }}</li>';
-                @endforeach
-                errorList += '</ul>';
+            Swal.fire({
+                title: 'Hapus pengguna?',
+                text: 'Akses pengguna ini akan dicabut secara permanen!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#6b7280',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal',
+                customClass: {
+                    confirmButton: 'rounded-xl font-bold',
+                    cancelButton: 'rounded-xl font-bold'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    });
 
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Validasi Gagal',
-                    html: errorList
-                });
-            @endif
+    // Success notification from session
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+            timer: 2500,
+            showConfirmButton: false,
+            customClass: { popup: 'rounded-[2rem]' }
         });
-    </script>
+    @endif
+</script>
 @endpush

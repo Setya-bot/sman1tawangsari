@@ -3,211 +3,165 @@
 @section('title', 'Informasi Akademik - SMA Negeri 1 Tawangsari')
 
 @section('content')
-
-    <!-- Hero Header -->
-    <div class="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://source.unsplash.com/1920x1080/?classroom,learning,teacher')] bg-cover bg-center"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/65 to-black/80"></div>
+    <div class="relative h-[65vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-tr from-gray-900 via-gray-900/70 to-transparent"></div>
         
-        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            <span class="inline-block px-6 py-2 bg-white/20 backdrop-blur-md text-white text-sm font-medium rounded-full mb-6">
-                Informasi Akademik
-            </span>
-            <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight leading-none mb-6">
-                Akademik SMA Negeri 1 Tawangsari
-            </h1>
-            <p class="text-xl text-white/90 max-w-2xl mx-auto">
-                Kurikulum Merdeka • Pembelajaran Berkualitas • Pengembangan Potensi Siswa Secara Holistik
-            </p>
+        <div class="absolute top-20 right-20 w-64 h-64 bg-[#48c3d9]/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-10 left-10 w-40 h-40 bg-white/5 rounded-full blur-2xl"></div>
+        
+        <div class="relative z-10 text-left px-6 max-w-7xl mx-auto w-full">
+            <div class="max-w-3xl">
+                <span class="inline-block px-4 py-1.5 bg-[#48c3d9] text-gray-900 text-xs font-bold uppercase tracking-[0.2em] rounded-md mb-6 shadow-lg shadow-[#48c3d9]/20">
+                    Academic Excellence
+                </span>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+                    Sistem <span class="text-[#48c3d9] relative inline-block">Akademik
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed border-l-4 border-[#48c3d9] pl-6">
+                    Implementasi Kurikulum Merdeka yang adaptif, inovatif, dan berorientasi pada masa depan siswa.
+                </p>
+            </div>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 py-20">
-
-        <!-- Deskripsi Kurikulum -->
-        <div class="max-w-3xl mx-auto text-center mb-20">
-            <h2 class="text-4xl font-semibold text-gray-900 mb-6">Kurikulum Merdeka</h2>
-            <p class="text-lg text-gray-600 leading-relaxed">
-                SMA Negeri 1 Tawangsari menerapkan Kurikulum Merdeka yang memberikan fleksibilitas kepada siswa untuk memilih mata pelajaran 
-                sesuai minat, bakat, dan aspirasi karir mereka. Pembelajaran dilakukan dengan pendekatan <span class="font-medium">student-centered learning</span>, 
-                di mana guru berperan sebagai fasilitator.
-            </p>
-        </div>
-
-        <!-- Keunggulan Kurikulum -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-            @foreach([
-                ['icon' => '🚀', 'title' => 'Pembelajaran Berbasis Proyek', 'desc' => 'Mengembangkan kreativitas dan kemampuan problem solving siswa'],
-                ['icon' => '🛡️', 'title' => 'Profil Pelajar Pancasila', 'desc' => 'Penguatan melalui kegiatan Projek Penguatan Profil Pelajar Pancasila (P5)'],
-                ['icon' => '🎯', 'title' => 'Fleksibilitas Peminatan', 'desc' => 'Siswa dapat memilih mata pelajaran sesuai minat dan bakat'],
-                ['icon' => '💻', 'title' => 'Integrasi Teknologi', 'desc' => 'Pemanfaatan teknologi dalam proses pembelajaran'],
-                ['icon' => '📊', 'title' => 'Asesmen Autentik', 'desc' => 'Penilaian yang beragam dan sesuai dengan kemampuan siswa']
-            ] as $keunggulan)
-            <div class="bg-white border border-gray-100 rounded-3xl p-8 hover:shadow-xl transition-all duration-300">
-                <div class="text-5xl mb-6">{{ $keunggulan['icon'] }}</div>
-                <h3 class="text-2xl font-semibold text-gray-900 mb-3">{{ $keunggulan['title'] }}</h3>
-                <p class="text-gray-600">{{ $keunggulan['desc'] }}</p>
+    <div class="max-w-7xl mx-auto px-6 py-20 relative">
+        
+        <div class="relative mb-32">
+            <div class="max-w-3xl mx-auto text-center mb-20 relative z-10">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Filosofi Kurikulum Merdeka</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Kami percaya setiap siswa memiliki potensi unik. Pendekatan <span class="text-[#48c3d9] font-bold">Student-Centered Learning</span> kami memastikan setiap individu mendapatkan ruang untuk bertumbuh sesuai minatnya.
+                </p>
             </div>
-            @endforeach
-        </div>
 
-        <!-- Program Peminatan -->
-        <div class="mb-24">
-            <h2 class="text-4xl font-semibold text-center text-gray-900 mb-12">Program Peminatan</h2>
-            
-            <div class="grid md:grid-cols-3 gap-10">
-
-                <!-- MIPA -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-blue-200 transition-all">
-                    <div class="h-2 bg-blue-500"></div>
-                    <div class="p-8">
-                        <div class="text-5xl mb-4">🔬</div>
-                        <h3 class="text-3xl font-semibold mb-2">MIPA</h3>
-                        <p class="text-blue-600 font-medium mb-6">Matematika dan Ilmu Pengetahuan Alam</p>
-                        <ul class="space-y-3 text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Matematika Lanjut</li>
-                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Fisika</li>
-                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Kimia</li>
-                            <li class="flex items-start gap-2"><span class="text-blue-500 mt-1">•</span> Biologi</li>
-                        </ul>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+                @foreach([
+                    ['icon' => '🚀', 'title' => 'Project Based Learning', 'label' => 'Metode'],
+                    ['icon' => '🛡️', 'title' => 'Profil Pelajar Pancasila', 'label' => 'Karakter'],
+                    ['icon' => '🎯', 'title' => 'Fleksibilitas Peminatan', 'label' => 'Sistem'],
+                    ['icon' => '💻', 'title' => 'Integrasi Digital', 'label' => 'Teknologi'],
+                    ['icon' => '📊', 'title' => 'Asesmen Adaptif', 'label' => 'Evaluasi'],
+                    ['icon' => '🤝', 'title' => 'Kolaborasi Industri', 'label' => 'Networking']
+                ] as $keunggulan)
+                <div class="group bg-white p-8 rounded-[2.5rem] border border-gray-100 hover:border-[#48c3d9] hover:shadow-2xl hover:shadow-[#48c3d9]/10 transition-all duration-500">
+                    <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-[#48c3d9]/10 group-hover:scale-110 transition-all duration-500">
+                        {{ $keunggulan['icon'] }}
                     </div>
+                    <span class="text-[10px] font-bold text-[#48c3d9] uppercase tracking-widest mb-2 block">{{ $keunggulan['label'] }}</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $keunggulan['title'] }}</h3>
+                    <div class="h-1 w-12 bg-gray-100 group-hover:w-20 group-hover:bg-[#48c3d9] transition-all duration-500"></div>
                 </div>
-
-                <!-- IPS -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-emerald-200 transition-all">
-                    <div class="h-2 bg-emerald-500"></div>
-                    <div class="p-8">
-                        <div class="text-5xl mb-4">📊</div>
-                        <h3 class="text-3xl font-semibold mb-2">IPS</h3>
-                        <p class="text-emerald-600 font-medium mb-6">Ilmu Pengetahuan Sosial</p>
-                        <ul class="space-y-3 text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> Ekonomi</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> Sosiologi</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> Geografi</li>
-                            <li class="flex items-start gap-2"><span class="text-emerald-500 mt-1">•</span> Sejarah</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Bahasa -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-purple-200 transition-all">
-                    <div class="h-2 bg-purple-500"></div>
-                    <div class="p-8">
-                        <div class="text-5xl mb-4">🗣️</div>
-                        <h3 class="text-3xl font-semibold mb-2">Bahasa & Budaya</h3>
-                        <p class="text-purple-600 font-medium mb-6">Bahasa dan Sastra</p>
-                        <ul class="space-y-3 text-gray-600">
-                            <li class="flex items-start gap-2"><span class="text-purple-500 mt-1">•</span> Bahasa Indonesia</li>
-                            <li class="flex items-start gap-2"><span class="text-purple-500 mt-1">•</span> Bahasa Inggris</li>
-                            <li class="flex items-start gap-2"><span class="text-purple-500 mt-1">•</span> Bahasa Asing Lain</li>
-                            <li class="flex items-start gap-2"><span class="text-purple-500 mt-1">•</span> Antropologi</li>
-                        </ul>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
+            
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-1/2 bg-[#48c3d9]/5 -skew-y-3 rounded-[3rem] -z-10"></div>
         </div>
 
-        <!-- Kalender Akademik -->
-        <div class="mb-24">
-            <h2 class="text-4xl font-semibold text-gray-900 mb-10 text-center">Kalender Akademik 2024/2025</h2>
+        <div class="mb-32">
+            <div class="flex items-end justify-between mb-12">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Konsentrasi Pembelajaran</h2>
+                    <p class="text-gray-500">Pilihan rumpun mata pelajaran yang dirancang untuk persiapan jenjang perguruan tinggi.</p>
+                </div>
+                <div class="hidden lg:block h-px flex-1 bg-gray-100 mx-10 mb-4"></div>
+            </div>
             
-            <div class="overflow-x-auto rounded-3xl border border-gray-100 shadow-sm">
-                <table class="w-full min-w-[800px]">
-                    <thead>
-                        <tr class="bg-gray-900 text-white">
-                            <th class="py-5 px-6 text-left font-medium">No</th>
-                            <th class="py-5 px-6 text-left font-medium">Kegiatan</th>
-                            <th class="py-5 px-6 text-left font-medium">Waktu Pelaksanaan</th>
-                            <th class="py-5 px-6 text-left font-medium">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        @foreach([
-                            ['1', 'Masa Pengenalan Lingkungan Sekolah (MPLS)', '15-17 Juli 2024', 'Kelas X'],
-                            ['2', 'Awal Tahun Pelajaran', '18 Juli 2024', 'Semua kelas'],
-                            ['3', 'Ulangan Tengah Semester Ganjil', '23-27 September 2024', 'Semua kelas'],
-                            ['4', 'Ulangan Akhir Semester Ganjil', '15-22 Desember 2024', 'Semua kelas'],
-                            ['5', 'Libur Semester Ganjil', '23 Des 2024 - 5 Jan 2025', 'Semua kelas'],
-                            ['6', 'Awal Semester Genap', '6 Januari 2025', 'Semua kelas'],
-                            ['7', 'ANBK', '10-12 Januari 2025', 'Kelas XI'],
-                            ['8', 'Ulangan Tengah Semester Genap', '10-14 Maret 2025', 'Semua kelas'],
-                            ['9', 'Ujian Sekolah', '7-15 April 2025', 'Kelas XII'],
-                            ['10', 'Ulangan Akhir Semester Genap', '8-15 Juni 2025', 'Kelas X & XI'],
-                            ['11', 'Libur Akhir Tahun Pelajaran', '16 Juni - 14 Juli 2025', 'Semua kelas']
-                        ] as $item)
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="py-5 px-6 font-medium text-gray-500">{{ $item[0] }}</td>
-                            <td class="py-5 px-6 font-medium">{{ $item[1] }}</td>
-                            <td class="py-5 px-6 text-gray-600">{{ $item[2] }}</td>
-                            <td class="py-5 px-6 text-gray-600">{{ $item[3] }}</td>
-                        </tr>
+            <div class="grid md:grid-cols-3 gap-8">
+                @php
+                    $peminatan = [
+                        ['title' => 'MIPA', 'sub' => 'Sains & Teknologi', 'icon' => '🔬', 'color' => '#48c3d9', 'list' => ['Matematika Lanjut', 'Fisika Dasar', 'Kimia Analitik', 'Biologi Molekuler']],
+                        ['title' => 'IPS', 'sub' => 'Sosial & Humaniora', 'icon' => '📊', 'color' => '#111827', 'list' => ['Ekonomi Bisnis', 'Sosiologi Terapan', 'Geografi Regional', 'Sejarah Dunia']],
+                        ['title' => 'Bahasa', 'sub' => 'Literasi & Komunikasi', 'icon' => '🗣️', 'color' => '#64748b', 'list' => ['Sastra Indonesia', 'English Proficiency', 'Bahasa Asing', 'Antropologi Budaya']]
+                    ];
+                @endphp
+
+                @foreach($peminatan as $p)
+                <div class="group relative bg-white border border-gray-100 rounded-[3rem] p-10 overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-[5rem] -z-10 group-hover:bg-opacity-50 transition-all"></div>
+                    <div class="text-5xl mb-6">{{ $p['icon'] }}</div>
+                    <h3 class="text-3xl font-black text-gray-900 mb-1">{{ $p['title'] }}</h3>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-8" style="color: {{ $p['color'] }}">{{ $p['sub'] }}</p>
+                    
+                    <ul class="space-y-4">
+                        @foreach($p['list'] as $item)
+                        <li class="flex items-center gap-3 text-sm text-gray-600">
+                            <span class="w-1.5 h-1.5 rounded-full" style="background-color: {{ $p['color'] }}"></span>
+                            {{ $item }}
+                        </li>
                         @endforeach
-                    </tbody>
-                </table>
+                    </ul>
+                </div>
+                @endforeach
             </div>
         </div>
 
-        <!-- Jadwal Pelajaran -->
-        <div>
-            <h2 class="text-4xl font-semibold text-gray-900 mb-4 text-center">Contoh Jadwal Pelajaran</h2>
-            <p class="text-center text-gray-500 mb-10">Kelas X MIPA 1 (Jadwal dapat berubah sewaktu-waktu)</p>
-
-            <div class="bg-white rounded-3xl shadow overflow-hidden border border-gray-100">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-gray-50">
-                            <th class="py-6 px-8 text-left font-medium text-gray-600">Jam</th>
-                            <th class="py-6 px-6 text-left font-medium text-gray-600">Senin</th>
-                            <th class="py-6 px-6 text-left font-medium text-gray-600">Selasa</th>
-                            <th class="py-6 px-6 text-left font-medium text-gray-600">Rabu</th>
-                            <th class="py-6 px-6 text-left font-medium text-gray-600">Kamis</th>
-                            <th class="py-6 px-6 text-left font-medium text-gray-600">Jumat</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm divide-y">
-                        <tr>
-                            <td class="py-5 px-8 font-medium text-gray-500">07.00 - 07.45</td>
-                            <td class="py-5 px-6">Upacara</td>
-                            <td class="py-5 px-6">Matematika</td>
-                            <td class="py-5 px-6">Fisika</td>
-                            <td class="py-5 px-6">Kimia</td>
-                            <td class="py-5 px-6">Pend. Agama</td>
-                        </tr>
-                        <tr>
-                            <td class="py-5 px-8 font-medium text-gray-500">07.45 - 08.30</td>
-                            <td class="py-5 px-6">PKn</td>
-                            <td class="py-5 px-6">Matematika</td>
-                            <td class="py-5 px-6">Fisika</td>
-                            <td class="py-5 px-6">Kimia</td>
-                            <td class="py-5 px-6">Pend. Agama</td>
-                        </tr>
-                        <tr>
-                            <td class="py-5 px-8 font-medium text-gray-500">08.30 - 09.15</td>
-                            <td class="py-5 px-6">Bahasa Indonesia</td>
-                            <td class="py-5 px-6">Biologi</td>
-                            <td class="py-5 px-6">Bahasa Inggris</td>
-                            <td class="py-5 px-6">Matematika</td>
-                            <td class="py-5 px-6">PJOK</td>
-                        </tr>
-                        <tr>
-                            <td class="py-5 px-8 font-medium text-gray-500">09.15 - 10.00</td>
-                            <td class="py-5 px-6">Bahasa Indonesia</td>
-                            <td class="py-5 px-6">Biologi</td>
-                            <td class="py-5 px-6">Bahasa Inggris</td>
-                            <td class="py-5 px-6">Matematika</td>
-                            <td class="py-5 px-6">Istirahat</td>
-                        </tr>
-                        <!-- Tambahkan baris lain sesuai kebutuhan -->
-                    </tbody>
-                </table>
+        <div class="grid gap-8 mb-32">
+            <div class="lg:col-span-3">
+                <div class="flex items-center gap-4 mb-10">
+                    <h2 class="text-3xl font-bold text-gray-900">Agenda Akademik</h2>
+                    <span class="px-4 py-1 bg-gray-900 text-white text-[10px] font-bold rounded-full uppercase tracking-tighter">Tahun Ajaran 2024/2025</span>
+                </div>
+                
+                <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-gray-200/50 border border-gray-50 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50/50 border-b border-gray-100">
+                                <th class="p-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Event</th>
+                                <th class="p-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">Timeline</th>
+                                <th class="p-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            @foreach([
+                                ['MPLS Siswa Baru', '15-17 Juli 2024', 'Selesai'],
+                                ['Awal Tahun Pelajaran', '18 Juli 2024', 'Aktif'],
+                                ['Asesmen Tengah Semester', '23-27 Sept 2024', 'Mendatang'],
+                                ['Libur Akhir Semester', '23 Des - 5 Jan 2025', 'Mendatang']
+                            ] as $event)
+                            <tr class="hover:bg-gray-50/50 transition-all group">
+                                <td class="p-6 font-bold text-gray-800 group-hover:text-[#48c3d9]">{{ $event[0] }}</td>
+                                <td class="p-6 text-sm text-gray-500 font-mono">{{ $event[1] }}</td>
+                                <td class="p-6 text-right">
+                                    <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase {{ $event[2] == 'Selesai' ? 'bg-green-100 text-green-600' : ($event[2] == 'Aktif' ? 'bg-blue-100 text-[#48c3d9]' : 'bg-gray-100 text-gray-400') }}">
+                                        {{ $event[2] }}
+                                    </span>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </div>
+
+        <div class="bg-gray-900 rounded-[3.5rem] p-10 md:p-16 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-[#48c3d9]/10 rounded-full blur-[100px] -mr-32 -mt-32"></div>
             
-            <p class="text-xs text-gray-400 text-center mt-6 italic">
-                * Jadwal di atas merupakan contoh dan dapat berubah sewaktu-waktu sesuai kebijakan sekolah.
-            </p>
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-4">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-2">Simulasi Jadwal Harian</h2>
+                        <p class="text-gray-400 text-sm">Contoh distribusi jam pelajaran efektif.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat'] as $hari)
+                    <div class="bg-white/5 border border-white/10 p-6 rounded-3xl hover:bg-white/10 transition-all cursor-default group">
+                        <p class="text-[#48c3d9] font-bold text-xs uppercase tracking-[0.2em] mb-4">{{ $hari }}</p>
+                        <div class="space-y-3">
+                            <div class="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                                <div class="h-full bg-[#48c3d9] w-2/3 group-hover:w-full transition-all duration-700"></div>
+                            </div>
+                            <p class="text-white text-sm font-medium">8 Jam Pelajaran</p>
+                            <p class="text-gray-500 text-[10px]">Mulai 07.00 WIB</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
-
     </div>
-
 @endsection

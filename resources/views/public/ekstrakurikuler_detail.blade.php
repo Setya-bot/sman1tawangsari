@@ -2,25 +2,27 @@
 
 @section('title', $extra->name . ' - Ekstrakurikuler')
 
-@section('content')
+@section('content') 
 
-    <div class="relative h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
-        <div
-            class="absolute inset-0 bg-[url('https://source.unsplash.com/1920x1080/?students,extracurricular,activity')] bg-cover bg-center">
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
-
-
-        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-            <span class="inline-block px-4 py-1.5 bg-emerald-500 text-white text-xs font-bold uppercase tracking-widest rounded-full mb-4">
-                Ekstrakurikuler
-            </span>
-            <h1 class="text-4xl md:text-7xl font-extrabold text-white tracking-tight mb-4 drop-shadow-lg">
-                {{ $extra->name }}
-            </h1>
-            <p class="text-white/90 text-lg md:text-xl max-w-2xl mx-auto font-light">
-                Program pengembangan bakat SMA Negeri 1 Tawangsari
-            </p>
+    <div class="relative h-[65vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-tr from-gray-900 via-gray-900/70 to-transparent"></div>
+        
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-[#48c3d9]/20 rounded-full blur-3xl"></div>
+        
+        <div class="relative z-10 text-left px-6 max-w-7xl mx-auto w-full">
+            <div class="max-w-3xl">
+                <span class="inline-block px-4 py-1.5 bg-[#48c3d9] text-gray-900 text-xs font-bold uppercase tracking-widest rounded-md mb-6 shadow-lg shadow-[#48c3d9]/20">
+                    Ekstrakurikuler
+                </span>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+                    Ekskul <span class="text-[#48c3d9] relative">{{ $extra->name }}
+                    </span>
+                </h1>
+                <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed border-l-4 border-[#48c3d9] pl-6 border-l-4 border-[#48c3d9] pl-6">
+                    Program pengembangan bakat SMA Negeri 1 Tawangsari
+                </p>
+            </div>
         </div>
     </div>
 
@@ -35,12 +37,12 @@
 
                 <div class="mt-16 bg-white border border-gray-100 shadow-sm rounded-3xl p-8 md:p-10">
                     <h3 class="text-2xl font-bold mb-8 text-gray-800 flex items-center gap-3">
-                        <span class="w-8 h-1 bg-emerald-500 rounded-full"></span>
+                        <span class="w-8 h-1 bg-[#48c3d9]/20 -500 rounded-full"></span>
                         Detail Kegiatan
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="flex gap-5">
-                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 text-xl shadow-sm">
+                            <div class="w-12 h-12 bg-[#48c3d9]/20 -50 text-[#48c3d9] rounded-2xl flex items-center justify-center flex-shrink-0 text-xl shadow-sm">
                                 <i class="far fa-calendar-alt"></i>
                             </div>
                             <div>
@@ -49,7 +51,7 @@
                             </div>
                         </div>
                         <div class="flex gap-5">
-                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 text-xl shadow-sm">
+                            <div class="w-12 h-12 bg-[#48c3d9]/20 -50 text-[#48c3d9] rounded-2xl flex items-center justify-center flex-shrink-0 text-xl shadow-sm">
                                 <i class="fas fa-users"></i>
                             </div>
                             <div>
@@ -75,7 +77,7 @@
                             @endif
                         </div>
                         <h4 class="font-bold text-xl text-gray-800">{{ $extra->name }}</h4>
-                        <p class="text-emerald-600 font-medium text-sm mt-1 uppercase tracking-wider">Unit Kegiatan Siswa</p>
+                        <p class="text-[#48c3d9] font-medium text-sm mt-1 uppercase tracking-wider">Unit Kegiatan Siswa</p>
                         
                         <hr class="my-6 border-gray-100">
 
@@ -137,13 +139,13 @@
                             </div>
 
                             <div class="p-8">
-                                <h4 class="font-bold text-xl text-gray-800 group-hover:text-emerald-600 transition-colors">
+                                <h4 class="font-bold text-xl text-gray-800 group-hover:text-[#48c3d9] transition-colors">
                                     {{ $item->name }}
                                 </h4>
                                 <p class="text-gray-500 text-sm mt-3 line-clamp-2 font-light leading-relaxed">
                                     {{ $item->description ?? 'Lihat detail kegiatan dan program kerja untuk unit ini.' }}
                                 </p>
-                                <div class="mt-6 flex items-center text-emerald-600 font-bold text-sm">
+                                <div class="mt-6 flex items-center text-[#48c3d9] font-bold text-sm">
                                     Lihat Detail <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-2"></i>
                                 </div>
                             </div>

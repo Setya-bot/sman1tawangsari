@@ -49,7 +49,7 @@
 
                     <div class="absolute left-0 w-48 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                         <div class="py-1">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Kata Sambutan</a>
+                            <a href="{{ route('opening') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Kata Sambutan</a>
                             <a href="{{ route('history') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Sejarah & Visi Misi</a>
                             <a href="{{ route('gtk') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Guru & Tendik</a>
                             <a href="{{ route('service') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Layanan</a>
@@ -114,7 +114,7 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="profileSub" class="hidden flex-col ml-4 border-l-2 border-blue-500 pl-4 gap-2 mb-2">
-                    <a href="#" class="py-1 text-sm text-gray-600">Kata Sambutan</a>
+                    <a href="{{ route('opening') }}" class="py-1 text-sm text-gray-600">Kata Sambutan</a>
                     <a href="{{ route('history') }}" class="py-1 text-sm text-gray-600">Sejarah</a>
                     <a href="{{ route('gtk') }}" class="py-1 text-sm text-gray-600">Guru & Tendik</a>
                     <a href="{{ route('service') }}" class="py-1 text-sm text-gray-600">Layanan</a>
@@ -132,12 +132,12 @@
 </nav>
 
 <!-- ================= CONTENT ================= -->
-<main>
+<main class="pt-16">
     @yield('content')
 </main>
 
 <!-- ================= FOOTER ================= -->
-<footer class="bg-slate-900 text-white mt-16">
+<footer class="bg-slate-900 text-white">
     <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8">
 
         <div>

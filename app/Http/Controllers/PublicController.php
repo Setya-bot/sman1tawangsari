@@ -65,4 +65,9 @@ class PublicController extends Controller
     {
         return view('public.gtk');
     }
+
+    public function opening()
+    {
+        return view('public.opening');
+    }
 }

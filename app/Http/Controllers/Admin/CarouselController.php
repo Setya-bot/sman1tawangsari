@@ -24,27 +24,58 @@ class CarouselController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi dasar
         $request->validate([
-            'title' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'link' => 'nullable|url',
-            'order' => 'nullable|integer|unique:carousels,order',
-            'is_active' => 'nullable|boolean'
+            'title'         => 'required|string|max:255',
+            'description'   => 'nullable|string',
+            'link'          => 'nullable|url',
+            'order'         => 'nullable|integer|unique:carousels,order',
+            'is_active'     => 'nullable|boolean',
+            'cropped_image' => 'nullable|string',
         ]);
 
-        $imagePath = $request->file('image')->store('carousels', 'public');
+        $imagePath = null;
+
+        // === LOGIKA GAMBAR ===
+        if ($request->filled('cropped_image')) {
+            // Proses base64 dari cropper
+            $base64 = $request->cropped_image;
+
+            // Hapus prefix base64
+            $base64 = preg_replace('/^data:image\/\w+;base64,/', '', $base64);
+            $base64 = str_replace(' ', '+', $base64);
+
+            $imageName = 'carousel_' . time() . '.jpg';
+
+            Storage::disk('public')->put(
+                'carousels/' . $imageName,
+                base64_decode($base64)
+            );
+
+            $imagePath = 'carousels/' . $imageName;
+        } 
+        elseif ($request->hasFile('image')) {
+            // Fallback jika user upload manual tanpa crop
+            $imagePath = $request->file('image')->store('carousels', 'public');
+        } 
+        else {
+            // Jika tidak ada cropped_image dan tidak ada file image
+            return back()
+                ->withErrors(['image' => 'Gambar wajib diisi'])
+                ->withInput();
+        }
 
         Carousel::create([
-            'title' => $request->title,
+            'title'       => $request->title,
             'description' => $request->description,
-            'image' => $imagePath,
-            'link' => $request->link,
-            'order' => $request->order ?? ((Carousel::max('order') ?? 0) + 1),
-            'is_active' => $request->input('is_active')
+            'image'       => $imagePath,
+            'link'        => $request->link,
+            'order'       => $request->order ?? ((Carousel::max('order') ?? 0) + 1),
+            'is_active'   => $request->boolean('is_active'),
         ]);
 
-        return redirect()->route('carousels.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('carousels.index')
+                        ->with('success', 'Carousel berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -69,6 +100,25 @@ class CarouselController extends Controller
             ],
             'is_active' => 'nullable|boolean'
         ]);
+
+        if ($request->filled('cropped_image')) {
+            if ($carousel->image) {
+                Storage::disk('public')->delete($carousel->image);
+            }
+
+            $base64 = $request->cropped_image;
+            $base64 = preg_replace('/^data:image\/\w+;base64,/', '', $base64);
+            $base64 = str_replace(' ', '+', $base64);
+
+            $imageName = 'carousel_' . time() . '.jpg';
+
+            Storage::disk('public')->put('carousels/' . $imageName, base64_decode($base64));
+            $carousel->image = 'carousels/' . $imageName;
+        }
+        elseif ($request->hasFile('image')) {
+            if ($carousel->image) Storage::disk('public')->delete($carousel->image);
+            $carousel->image = $request->file('image')->store('carousels', 'public');
+        }
 
         if ($request->hasFile('image')) {
             if ($carousel->image) {
