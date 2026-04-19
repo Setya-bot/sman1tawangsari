@@ -81,26 +81,6 @@
         </div>
 
         <div class="mb-24">
-            <h2 class="text-4xl font-semibold text-gray-900 text-center mb-12">Sarana & Prasarana</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach([
-                    ['emoji' => '🔬', 'title' => 'Laboratorium', 'desc' => '3 Lab IPA (Fisika, Kimia, Biologi), 2 Lab Komputer, 1 Lab Bahasa dengan peralatan modern'],
-                    ['emoji' => '📚', 'title' => 'Perpustakaan', 'desc' => 'Koleksi 15.000+ buku, ruang baca nyaman, akses digital & e-book'],
-                    ['emoji' => '⚽', 'title' => 'Lapangan Olahraga', 'desc' => 'Lapangan basket, voli, futsal, dan atletik dengan standar nasional'],
-                    ['emoji' => '🕌', 'title' => 'Musholla', 'desc' => 'Musholla luas dengan kapasitas 200 jamaah'],
-                    ['emoji' => '🏫', 'title' => 'Ruang Kelas', 'desc' => '36 ruang kelas ber-AC dengan LCD projector dan sound system'],
-                    ['emoji' => '🎭', 'title' => 'Aula', 'desc' => 'Aula serbaguna kapasitas 500 orang']
-                ] as $fasilitas)
-                <div class="bg-white border border-gray-100 rounded-3xl p-8 hover:border-[#48c3d9] transition-all group shadow-sm hover:shadow-md">
-                    <div class="text-6xl mb-6">{{ $fasilitas['emoji'] }}</div>
-                    <h4 class="text-2xl font-semibold mb-3 group-hover:text-[#48c3d9] transition-colors">{{ $fasilitas['title'] }}</h4>
-                    <p class="text-gray-600">{{ $fasilitas['desc'] }}</p>
-                </div>
-                @endforeach
-            </div>
-        </div>
-
-        <div class="mb-24">
             <h2 class="text-4xl font-semibold text-gray-900 text-center mb-12">Statistik Sekolah</h2>
             <div class="grid lg:grid-cols-12 gap-12">
                 <div class="lg:col-span-5">
@@ -129,13 +109,10 @@
                 </div>
 
                 <div class="lg:col-span-7">
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
                         @foreach([
-                            ['label' => 'Siswa Laki-laki', 'value' => '480', 'satuan' => 'siswa'],
-                            ['label' => 'Siswa Perempuan', 'value' => '600', 'satuan' => 'siswa'],
                             ['label' => 'Total Siswa', 'value' => '1.080', 'satuan' => 'siswa'],
-                            ['label' => 'Guru PNS/PPPK', 'value' => '32', 'satuan' => 'orang'],
-                            ['label' => 'Guru Honorer', 'value' => '16', 'satuan' => 'orang'],
+                            ['label' => 'Guru', 'value' => '16', 'satuan' => 'orang'],
                             ['label' => 'Tenaga Kependidikan', 'value' => '12', 'satuan' => 'orang'],
                             ['label' => 'Ruang Teori', 'value' => '36', 'satuan' => 'ruang'],
                             ['label' => 'Luas Tanah', 'value' => '15.000', 'satuan' => 'm²'],

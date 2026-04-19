@@ -13,7 +13,7 @@
                     Kesiswaan
                 </span>
                 <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
-                    Layanan & Pembinaan <span class="text-[#48c3d9]">Siswa</span>
+                    Pembinaan <span class="text-[#48c3d9]">Siswa</span>
                 </h1>
                 <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed border-l-4 border-[#48c3d9] pl-6">
                     Mewujudkan lingkungan belajar yang kondusif melalui sistem pembinaan karakter dan layanan pendukung perkembangan siswa yang prima.

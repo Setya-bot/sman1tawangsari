@@ -24,16 +24,19 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-16 relative z-20">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             @foreach([
                 ['title' => 'Pusat Karier & PTN', 'icon' => '🎓', 'desc' => 'Layanan peminatan dan bimbingan masuk Perguruan Tinggi Negeri/Kedinasan.'],
                 ['title' => 'Infrastruktur Digital', 'icon' => '⚡', 'desc' => 'Akses internet stabil dan platform pembelajaran mandiri 24 jam.'],
                 ['title' => 'Layanan Inklusi', 'icon' => '🤝', 'desc' => 'Pendampingan khusus bagi keberagaman kebutuhan belajar setiap siswa.']
             ] as $top)
-            <div class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100 group hover:bg-[#48c3d9] transition-all duration-500">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">{{ $top['icon'] }}</div>
-                <h3 class="text-xl font-bold text-gray-900 group-hover:text-white mb-2">{{ $top['title'] }}</h3>
-                <p class="text-gray-500 group-hover:text-white/90 text-sm leading-relaxed">{{ $top['desc'] }}</p>
+            <div class="group bg-white p-8 mb-16 rounded-[2.5rem] border border-gray-100 hover:border-[#48c3d9] hover:shadow-2xl hover:shadow-[#48c3d9]/10 transition-all duration-500 shadow-lg">
+                <div class="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-[#48c3d9]/10 group-hover:scale-110 transition-all duration-500">
+                    {{ $top['icon'] }}
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-1">{{ $top['title'] }}</h3>
+                <p class="text-sm text-gray-500 mb-3">{{ $top['desc'] }}</p>
+                <div class="h-1 w-12 bg-gray-100 group-hover:w-20 group-hover:bg-[#48c3d9] transition-all duration-500"></div>
             </div>
             @endforeach
         </div>
@@ -52,7 +55,6 @@
                             <div>
                                 <h4 class="text-xl font-bold text-gray-900 mb-2">Learning Management System</h4>
                                 <p class="text-gray-600 text-sm mb-4">Akses materi, pengumpulan tugas, dan ujian berbasis digital melalui portal resmi sekolah.</p>
-                                <a href="#" class="text-[#48c3d9] font-bold text-sm hover:underline">Akses LMS →</a>
                             </div>
                         </div>
                     </div>
@@ -62,7 +64,6 @@
                             <div>
                                 <h4 class="text-xl font-bold text-gray-900 mb-2">E-Rapor & Monitoring</h4>
                                 <p class="text-gray-600 text-sm mb-4">Pantau perkembangan nilai akademik dan kehadiran secara real-time dari perangkat Anda.</p>
-                                <a href="#" class="text-[#48c3d9] font-bold text-sm hover:underline">Lihat Progres →</a>
                             </div>
                         </div>
                     </div>
@@ -95,7 +96,6 @@
                             <div>
                                 <h4 class="text-xl font-bold text-gray-900 mb-2">E-Payment (SPP)</h4>
                                 <p class="text-gray-600 text-sm mb-4">Sistem pembayaran iuran sekolah yang transparan via Virtual Account berbagai Bank.</p>
-                                <a href="#" class="text-[#48c3d9] font-bold text-sm hover:underline">Bayar Sekarang →</a>
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,6 @@
                             <div>
                                 <h4 class="text-xl font-bold text-gray-900 mb-2">Layanan Persuratan</h4>
                                 <p class="text-gray-600 text-sm mb-4">Pengajuan surat keterangan aktif, beasiswa, dan legalisir ijazah secara cepat.</p>
-                                <a href="#" class="text-[#48c3d9] font-bold text-sm hover:underline">Ajukan Surat →</a>
                             </div>
                         </div>
                     </div>
@@ -144,29 +143,6 @@
                     <p class="text-gray-500 text-xs leading-relaxed mb-4">Masjid yang representatif untuk kegiatan keagamaan rutin seluruh warga sekolah.</p>
                     <span class="text-[10px] font-bold text-[#48c3d9] uppercase">Kapasitas 500 Jamaah</span>
                 </div>
-            </div>
-        </div>
-
-        <div class="mb-32">
-            <div class="flex items-center gap-4 mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">Pusat Penelitian & Laboratorium</h2>
-                <div class="flex-grow h-[1px] bg-gray-200"></div>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                @foreach([
-                    ['name' => 'Lab Fisika', 'img' => '🔬'],
-                    ['name' => 'Lab Biologi', 'img' => '🧬'],
-                    ['name' => 'Lab Kimia', 'img' => '🧪'],
-                    ['name' => 'Lab Komputer', 'img' => '💻'],
-                    ['name' => 'Lab Bahasa', 'img' => '🎧'],
-                    ['name' => 'Studio Seni', 'img' => '🎨']
-                ] as $lab)
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl text-center hover:shadow-lg transition-shadow cursor-default">
-                    <div class="text-3xl mb-3">{{ $lab['img'] }}</div>
-                    <p class="text-sm font-bold text-gray-700">{{ $lab['name'] }}</p>
-                </div>
-                @endforeach
             </div>
         </div>
 

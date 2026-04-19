@@ -21,6 +21,11 @@ Route::get('/ekstrakurikuler/{id}', [PublicController::class, 'detailEkstrakurik
     ->name('ekstrakurikuler.detail');
 Route::get('/gtk', [PublicController::class, 'gtk'])->name('gtk');
 Route::get('/opening', [PublicController::class, 'opening'])->name('opening');
+Route::get('/sarana', [PublicController::class, 'sarana'])->name('sarana');
+Route::get('/sarana_detail', [PublicController::class, 'saranaDetail'])->name('sarana_detail');
+Route::get('/spmb', [PublicController::class, 'spmb'])->name('spmb');
+Route::get('/achievment', [PublicController::class, 'achievment'])->name('achievment');
+Route::get('/alumni', [PublicController::class, 'alumni'])->name('alumni');
 // Route::get('/', function () {
 //     return redirect()->route('admin');
 // });

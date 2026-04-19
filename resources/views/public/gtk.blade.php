@@ -85,27 +85,25 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach([
-                    ['nama' => 'Dra. Ratna Sari, M.Pd.', 'mapel' => 'Matematika'],
-                    ['nama' => 'Ir. Hadi Gunawan, M.Sc.', 'mapel' => 'Fisika'],
-                    ['nama' => 'Dra. Lestari Indah, M.Si.', 'mapel' => 'Kimia'],
-                    ['nama' => 'Dr. Bambang Setiawan, M.Pd.', 'mapel' => 'Biologi'],
-                    ['nama' => 'Drs. Eko Prabowo, M.Pd.', 'mapel' => 'Ekonomi'],
-                    ['nama' => 'Dra. Wulandari, M.Si.', 'mapel' => 'Geografi'],
-                    ['nama' => 'Drs. Agung Nugroho, M.Hum.', 'mapel' => 'Sosiologi'],
-                    ['nama' => 'Drs. Supriyadi, M.Pd.', 'mapel' => 'Sejarah']
+                    ['nama' => 'Drs. Ahmad Suryanto, M.Pd.', 'jabatan' => 'Kepala Sekolah', 'nip' => '196505121990031002'],
+                    ['nama' => 'Dra. Sri Wahyuni, M.Pd.', 'jabatan' => 'Wakasek Kurikulum', 'nip' => '196708151992032001'],
+                    ['nama' => 'Drs. Budi Santoso, M.Pd.', 'jabatan' => 'Wakasek Kesiswaan', 'nip' => '196809201993031003'],
+                    ['nama' => 'Drs. Hendra Wijaya, M.M.', 'jabatan' => 'Wakasek Sarpras', 'nip' => '196910051994031001']
                 ] as $guru)
-                <div class="bg-gray-50 border border-gray-200 overflow-hidden group hover:bg-white transition-all">
-                    <div class="flex flex-col">
-                        <div class="aspect-square overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                             <img src="https://ui-avatars.com/api/?name={{ urlencode($guru['nama']) }}&background=cbd5e1&color=ffffff&size=256" 
-                                  class="w-full h-full object-cover" alt="{{ $guru['nama'] }}">
-                        </div>
-                        <div class="p-6">
-                            <h4 class="font-bold text-gray-900 text-sm mb-1">{{ $guru['nama'] }}</h4>
-                            <p class="text-[#48c3d9] text-[10px] font-bold uppercase tracking-widest">{{ $guru['mapel'] }}</p>
-                        </div>
+                <div class="bg-white border border-gray-200 p-4 shadow-sm group hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-[3/4] overflow-hidden mb-6 relative">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($guru['nama']) }}&background=f3f4f6&color=48c3d9&size=512" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                             alt="{{ $guru['nama'] }}">
+                        <div class="absolute inset-0 border-[12px] border-white opacity-20"></div>
+                    </div>
+                    <div class="text-center px-2 pb-4">
+                        <h4 class="font-bold text-gray-900 leading-snug mb-2 min-h-[3rem] flex items-center justify-center">{{ $guru['nama'] }}</h4>
+                        <div class="h-px w-10 bg-[#48c3d9] mx-auto mb-3"></div>
+                        <p class="text-[#48c3d9] text-[11px] font-black uppercase tracking-widest mb-3">{{ $guru['jabatan'] }}</p>
+                        <p class="text-[10px] text-gray-400 font-mono">NIP. {{ $guru['nip'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -120,27 +118,25 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach([
-                    ['nama' => 'Dra. Ratna Sari, M.Pd.', 'mapel' => 'Matematika'],
-                    ['nama' => 'Ir. Hadi Gunawan, M.Sc.', 'mapel' => 'Fisika'],
-                    ['nama' => 'Dra. Lestari Indah, M.Si.', 'mapel' => 'Kimia'],
-                    ['nama' => 'Dr. Bambang Setiawan, M.Pd.', 'mapel' => 'Biologi'],
-                    ['nama' => 'Drs. Eko Prabowo, M.Pd.', 'mapel' => 'Ekonomi'],
-                    ['nama' => 'Dra. Wulandari, M.Si.', 'mapel' => 'Geografi'],
-                    ['nama' => 'Drs. Agung Nugroho, M.Hum.', 'mapel' => 'Sosiologi'],
-                    ['nama' => 'Drs. Supriyadi, M.Pd.', 'mapel' => 'Sejarah']
-                ] as $guru)
-                <div class="bg-gray-50 border border-gray-200 overflow-hidden group hover:bg-white transition-all">
-                    <div class="flex flex-col">
-                        <div class="aspect-square overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-700">
-                             <img src="https://ui-avatars.com/api/?name={{ urlencode($guru['nama']) }}&background=cbd5e1&color=ffffff&size=256" 
-                                  class="w-full h-full object-cover" alt="{{ $guru['nama'] }}">
-                        </div>
-                        <div class="p-6">
-                            <h4 class="font-bold text-gray-900 text-sm mb-1">{{ $guru['nama'] }}</h4>
-                            <p class="text-[#48c3d9] text-[10px] font-bold uppercase tracking-widest">{{ $guru['mapel'] }}</p>
-                        </div>
+                    ['nama' => 'Drs. Ahmad Suryanto, M.Pd.', 'jabatan' => 'Kepala Sekolah', 'nip' => '196505121990031002'],
+                    ['nama' => 'Dra. Sri Wahyuni, M.Pd.', 'jabatan' => 'Wakasek Kurikulum', 'nip' => '196708151992032001'],
+                    ['nama' => 'Drs. Budi Santoso, M.Pd.', 'jabatan' => 'Wakasek Kesiswaan', 'nip' => '196809201993031003'],
+                    ['nama' => 'Drs. Hendra Wijaya, M.M.', 'jabatan' => 'Wakasek Sarpras', 'nip' => '196910051994031001']
+                ] as $tendik)
+                <div class="bg-white border border-gray-200 p-4 shadow-sm group hover:shadow-xl transition-all duration-300">
+                    <div class="aspect-[3/4] overflow-hidden mb-6 relative">
+                        <img src="https://ui-avatars.com/api/?name={{ urlencode($tendik['nama']) }}&background=f3f4f6&color=48c3d9&size=512" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                             alt="{{ $tendik['nama'] }}">
+                        <div class="absolute inset-0 border-[12px] border-white opacity-20"></div>
+                    </div>
+                    <div class="text-center px-2 pb-4">
+                        <h4 class="font-bold text-gray-900 leading-snug mb-2 min-h-[3rem] flex items-center justify-center">{{ $tendik['nama'] }}</h4>
+                        <div class="h-px w-10 bg-[#48c3d9] mx-auto mb-3"></div>
+                        <p class="text-[#48c3d9] text-[11px] font-black uppercase tracking-widest mb-3">{{ $tendik['jabatan'] }}</p>
+                        <p class="text-[10px] text-gray-400 font-mono">NIP. {{ $tendik['nip'] }}</p>
                     </div>
                 </div>
                 @endforeach

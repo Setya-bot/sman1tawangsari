@@ -106,13 +106,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-    <div class="relative h-20 overflow-hidden -mb-1">
-        <svg class="absolute bottom-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1440 54">
-            <path fill="#f3f4f6" d="M0 54L1440 54L1440 0C1440 0 1140 54 720 54C300 54 0 0 0 0L0 54Z"></path>
-        </svg>
-    </div>
-
 @endsection

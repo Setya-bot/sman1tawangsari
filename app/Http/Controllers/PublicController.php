@@ -61,6 +61,7 @@ class PublicController extends Controller
     {
         return view('public.academic');
     }
+
     public function gtk()
     {
         return view('public.gtk');
@@ -69,5 +70,30 @@ class PublicController extends Controller
     public function opening()
     {
         return view('public.opening');
+    }
+
+    public function sarana()
+    {
+        return view('public.sarana');
+    }
+    
+    public function saranaDetail()
+    {
+        return view('public.sarana_detail');
+    }
+
+    public function spmb()
+    {
+        return view('public.spmb');
+    }
+
+    public function achievment()
+    {
+        return view('public.achievment');
+    }
+
+    public function alumni()
+    {
+        return view('public.alumni');
     }
 }
