@@ -26,7 +26,7 @@
         <i class="icon">📄</i>
         <span>Carousel</span>
       </a>
-      <a href="{{ route('extras.index') }}" class="nav-link {{ Route::is('extras.index') ? 'active' : '' }}" data-link>
+      <a href="{{ route('ekskuls.index') }}" class="nav-link {{ Route::is('ekskuls.index') ? 'active' : '' }}" data-link>
         <i class="bi bi-activity"></i>
         <span>Ekstrakurikuler</span>
       </a>

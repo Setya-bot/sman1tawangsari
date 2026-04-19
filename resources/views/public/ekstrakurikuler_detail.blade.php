@@ -1,6 +1,6 @@
 @extends('public.layouts.main')
 
-@section('title', $extra->name . ' - Ekstrakurikuler')
+@section('title', $ekskul->name . ' - Ekstrakurikuler')
 
 @section('content') 
 
@@ -16,7 +16,7 @@
                     Ekstrakurikuler
                 </span>
                 <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
-                    Ekskul <span class="text-[#48c3d9] relative">{{ $extra->name }}
+                    Ekskul <span class="text-[#48c3d9] relative">{{ $ekskul->name }}
                     </span>
                 </h1>
                 <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed border-l-4 border-[#48c3d9] pl-6 border-l-4 border-[#48c3d9] pl-6">
@@ -31,8 +31,8 @@
 
             <div class="lg:col-span-8">
                 <div class="prose prose-emerald prose-lg max-w-none text-gray-600 leading-relaxed">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Tentang {{ $extra->name }}</h2>
-                    {!! nl2br(e($extra->description)) !!}
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Tentang {{ $ekskul->name }}</h2>
+                    {!! nl2br(e($ekskul->description)) !!}
                 </div>
 
                 <div class="mt-16 bg-white border border-gray-100 shadow-sm rounded-3xl p-8 md:p-10">
@@ -68,15 +68,15 @@
 
                     <div class="bg-white border border-gray-100 rounded-[2rem] p-8 text-center shadow-xl shadow-gray-100/50">
                         <div class="mx-auto w-32 h-32 bg-gray-50 rounded-[2rem] flex items-center justify-center shadow-inner mb-6 overflow-hidden border-4 border-white">
-                            @if($extra->image)
-                                <img src="{{ $extra->image_url }}" class="w-full h-full object-cover" alt="Logo">
+                            @if($ekskul->image)
+                                <img src="{{ $ekskul->image_url }}" class="w-full h-full object-cover" alt="Logo">
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
                                     <i class="fas fa-layer-group text-4xl"></i>
                                 </div>
                             @endif
                         </div>
-                        <h4 class="font-bold text-xl text-gray-800">{{ $extra->name }}</h4>
+                        <h4 class="font-bold text-xl text-gray-800">{{ $ekskul->name }}</h4>
                         <p class="text-[#48c3d9] font-medium text-sm mt-1 uppercase tracking-wider">Unit Kegiatan Siswa</p>
                         
                         <hr class="my-6 border-gray-100">
@@ -103,7 +103,7 @@
                         <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-emerald-500/20 rounded-full blur-3xl group-hover:bg-emerald-500/40 transition-all duration-700"></div>
                         <h4 class="font-bold text-white text-xl mb-4 relative z-10">Siap Bergabung?</h4>
                         <p class="text-gray-400 text-sm leading-relaxed mb-6 relative z-10">
-                            Kembangkan potensimu bersama komunitas {{ $extra->name }}. Pendaftaran dibuka setiap awal semester.
+                            Kembangkan potensimu bersama komunitas {{ $ekskul->name }}. Pendaftaran dibuka setiap awal semester.
                         </p>
                         <a href="https://wa.me/your-number" target="_blank"
                             class="flex items-center justify-center gap-2 w-full bg-emerald-500 hover:bg-emerald-600 text-white py-4 rounded-2xl font-bold transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-emerald-500/25 relative z-10">

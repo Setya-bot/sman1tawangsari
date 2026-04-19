@@ -18,7 +18,7 @@
                            class="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/5 transition-all text-sm">
                 </div>
                 
-                <a href="{{ route('extras.create') }}" 
+                <a href="{{ route('ekskuls.create') }}" 
                    class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-2xl font-bold transition-all shadow-lg shadow-blue-600/20 active:scale-95 text-sm w-full md:w-auto">
                     <i class="fas fa-plus"></i>
                     Tambah Ekstrakurikuler
@@ -38,17 +38,17 @@
                             <th class="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-[0.1em] text-center w-40">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="extra-table" class="divide-y divide-gray-100">
-                        @forelse ($extras as $key => $extra)
+                    <tbody id="ekskul-table" class="divide-y divide-gray-100">
+                        @forelse ($ekskuls as $key => $ekskul)
                         <tr class="hover:bg-gray-50/80 transition-colors group">
                             <td class="px-8 py-6 text-center text-gray-400 font-medium text-sm">
-                                {{ $extras->firstItem() + $key }}
+                                {{ $ekskuls->firstItem() + $key }}
                             </td>
                             <td class="px-6 py-6">
                                 <div class="w-16 h-16 bg-gray-100 rounded-2xl overflow-hidden border border-gray-100 shadow-inner group-hover:scale-105 transition-transform duration-300">
-                                    @if($extra->image)
-                                        <img src="{{ $extra->image_url }}" 
-                                             alt="{{ $extra->name }}" 
+                                    @if($ekskul->image)
+                                        <img src="{{ $ekskul->image_url }}" 
+                                             alt="{{ $ekskul->name }}" 
                                              class="w-full h-full object-cover">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-gray-300">
@@ -58,21 +58,21 @@
                                 </div>
                             </td>
                             <td class="px-6 py-6">
-                                <div class="font-bold text-gray-800 text-base group-hover:text-blue-600 transition-colors">{{ $extra->name }}</div>
+                                <div class="font-bold text-gray-800 text-base group-hover:text-blue-600 transition-colors">{{ $ekskul->name }}</div>
                             </td>
                             <td class="px-6 py-6 max-w-xs">
                                 <p class="text-gray-500 text-xs leading-relaxed line-clamp-2">
-                                    {{ $extra->description ?? 'Tidak ada deskripsi tersedia' }}
+                                    {{ $ekskul->description ?? 'Tidak ada deskripsi tersedia' }}
                                 </p>
                             </td>
                             <td class="px-8 py-6">
                                 <div class="flex justify-center items-center gap-2">
-                                    <a href="{{ route('extras.edit', $extra->id) }}" 
+                                    <a href="{{ route('ekskuls.edit', $ekskul->id) }}" 
                                        class="w-10 h-10 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm"
                                        title="Edit">
                                         <i class="fas fa-pen-to-square"></i>
                                     </a>
-                                    <form action="{{ route('extras.destroy', $extra->id) }}" method="POST" class="inline">
+                                    <form action="{{ route('ekskuls.destroy', $ekskul->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" 
@@ -101,9 +101,9 @@
                 </table>
             </div>
 
-            @if($extras->hasPages())
+            @if($ekskuls->hasPages())
                 <div class="px-8 py-6 bg-gray-50/50 border-t border-gray-100">
-                    {{ $extras->links() }}
+                    {{ $ekskuls->links() }}
                 </div>
             @endif
         </div>
@@ -114,12 +114,12 @@
 @push('scripts')
 <script>
     const searchInput = document.getElementById('search');
-    const tableBody = document.getElementById('extra-table');
+    const tableBody = document.getElementById('ekskul-table');
 
-    function fetchExtras() {
+    function fetchekskuls() {
         const search = searchInput.value;
 
-        fetch(`{{ route('extras.search') }}?search=${encodeURIComponent(search)}`)
+        fetch(`{{ route('ekskuls.search') }}?search=${encodeURIComponent(search)}`)
             .then(res => res.json())
             .then(data => {
                 let html = '';
@@ -156,10 +156,10 @@
                                 </td>
                                 <td class="px-8 py-6">
                                     <div class="flex justify-center items-center gap-2">
-                                        <a href="/admin/extras/${item.id}/edit" class="w-10 h-10 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm">
+                                        <a href="/admin/ekskuls/${item.id}/edit" class="w-10 h-10 flex items-center justify-center text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm">
                                             <i class="fas fa-pen-to-square"></i>
                                         </a>
-                                        <form action="/admin/extras/${item.id}" method="POST" class="inline">
+                                        <form action="/admin/ekskuls/${item.id}" method="POST" class="inline">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="button" class="w-10 h-10 flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-600 hover:text-white rounded-xl transition-all duration-300 shadow-sm delete-btn">
@@ -179,7 +179,7 @@
     let delay;
     searchInput.addEventListener('keyup', () => {
         clearTimeout(delay);
-        delay = setTimeout(fetchExtras, 350);
+        delay = setTimeout(fetchekskuls, 350);
     });
 
     // Handle Delete using SweetAlert (Event Delegation)

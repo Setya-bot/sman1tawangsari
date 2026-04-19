@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Extracurricular;
+use App\Models\Ekskul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ExtracurricularController extends Controller
+class EkskulController extends Controller
 {
     public function index()
     {
-        $extras = Extracurricular::latest()->paginate(10);
-        return view('admin.extras.index', compact('extras'));
+        $ekskuls = Ekskul::latest()->paginate(10);
+        return view('admin.ekskuls.index', compact('ekskuls'));
     }
 
     public function search(Request $request)
     {
-        $query = Extracurricular::query();
+        $query = Ekskul::query();
 
         if ($request->search) {
             $query->where('name', 'like', '%'.$request->search.'%');
@@ -28,7 +28,7 @@ class ExtracurricularController extends Controller
 
     public function create()
     {
-        return view('admin.extras.create');
+        return view('admin.ekskuls.create');
     }
 
     public function store(Request $request)
@@ -41,28 +41,28 @@ class ExtracurricularController extends Controller
         $imagePath = null;
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('extras', 'public');
+            $imagePath = $request->file('image')->store('ekskuls', 'public');
         }
 
-        Extracurricular::create([
+        Ekskul::create([
             'name' => $request->name,
             'description' => $request->description,
             'image' => $imagePath
         ]);
 
-        return redirect()->route('extras.index')
+        return redirect()->route('ekskuls.index')
             ->with('success', 'Data berhasil ditambahkan');
     }
 
     public function edit($id)
     {
-        $extra = Extracurricular::findOrFail($id);
-        return view('admin.extras.edit', compact('extra'));
+        $ekskul = Ekskul::findOrFail($id);
+        return view('admin.ekskuls.edit', compact('ekskul'));
     }
 
     public function update(Request $request, $id)
     {
-        $extra = Extracurricular::findOrFail($id);
+        $ekskul = Ekskul::findOrFail($id);
 
         $request->validate([
             'name' => 'required',
@@ -72,28 +72,28 @@ class ExtracurricularController extends Controller
         if ($request->hasFile('image')) {
 
             // hapus gambar lama
-            if ($extra->image && Storage::disk('public')->exists($extra->image)) {
-                Storage::disk('public')->delete($extra->image);
+            if ($ekskul->image && Storage::disk('public')->exists($ekskul->image)) {
+                Storage::disk('public')->delete($ekskul->image);
             }
 
-            $extra->image = $request->file('image')->store('extras', 'public');
+            $ekskul->image = $request->file('image')->store('ekskuls', 'public');
         }
 
-        $extra->update([
+        $ekskul->update([
             'name' => $request->name,
             'description' => $request->description,
-            'image' => $extra->image
+            'image' => $ekskul->image
         ]);
 
-        return redirect()->route('extras.index')
+        return redirect()->route('ekskuls.index')
             ->with('success', 'Data berhasil diupdate');
     }
 
-    public function destroy(Extracurricular $extra)
+    public function destroy(Ekskul $ekskul)
     {
-        $extra->delete();
+        $ekskul->delete();
 
-        return redirect()->route('extras.index')
+        return redirect()->route('ekskuls.index')
             ->with('success', 'Data berhasil dihapus');
     }
 }

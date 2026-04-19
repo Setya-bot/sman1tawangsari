@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CarouselController;
-use App\Http\Controllers\Admin\ExtracurricularController;
+use App\Http\Controllers\Admin\EkskulController;
 use App\Http\Controllers\Admin\SchoolProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
@@ -56,15 +56,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/school-profile', [SchoolProfileController::class, 'index'])->name('school.profile');
         Route::post('/school-profile', [SchoolProfileController::class, 'update'])->name('school.profile.update');
 
-        Route::resource('extras', ExtracurricularController::class)->names([
-            'index' => 'extras.index',
-            'create' => 'extras.create',
-            'store' => 'extras.store',
-            'edit' => 'extras.edit',
-            'update' => 'extras.update',
-            'destroy' => 'extras.destroy',
+        Route::resource('ekskuls', EkskulController::class)->names([
+            'index' => 'ekskuls.index',
+            'create' => 'ekskuls.create',
+            'store' => 'ekskuls.store',
+            'edit' => 'ekskuls.edit',
+            'update' => 'ekskuls.update',
+            'destroy' => 'ekskuls.destroy',
         ]);
-        Route::get('extras-search', [ExtracurricularController::class, 'search'])->name('extras.search');
+        Route::get('ekskuls-search', [EkskulController::class, 'search'])->name('ekskuls.search');
 
         Route::resource('carousels', \App\Http\Controllers\Admin\CarouselController::class);
         Route::get('carousels-search', [\App\Http\Controllers\Admin\CarouselController::class, 'search'])

@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Carousel;
 use App\Models\SchoolProfile;
-use App\Models\Extracurricular;
+use App\Models\Ekskul;
 
 class PublicController extends Controller
 {
     public function home()
     {
         $profile = SchoolProfile::first();
-        $extras = Extracurricular::latest()->take(6)->get();
+        $ekskuls = Ekskul::latest()->take(6)->get();
         $carousels = Carousel::where('is_active', 1)
                                 ->orderBy('order')
                                 ->get();
 
-        return view('public.home', compact('profile', 'extras', 'carousels'));
+        return view('public.home', compact('profile', 'ekskuls', 'carousels'));
     }
 
     public function history()
@@ -38,23 +38,23 @@ class PublicController extends Controller
 
     public function ekstrakurikuler()
     {
-        $extras = Extracurricular::latest()->get();
+        $ekskuls = Ekskul::latest()->get();
 
-        return view('public.ekstrakurikuler', compact('extras'));
+        return view('public.ekstrakurikuler', compact('ekskuls'));
     }
 
     public function detailEkstrakurikuler($id)
     {
         $profile = SchoolProfile::first();
 
-        $extra = Extracurricular::findOrFail($id);
+        $ekskul = Ekskul::findOrFail($id);
 
-        $others = Extracurricular::where('id', '!=', $id)
+        $others = Ekskul::where('id', '!=', $id)
                     ->latest()
                     ->take(3)
                     ->get();
 
-        return view('public.ekstrakurikuler_detail', compact('profile', 'extra', 'others'));
+        return view('public.ekstrakurikuler_detail', compact('profile', 'ekskul', 'others'));
     }
 
     public function academic()

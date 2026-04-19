@@ -37,7 +37,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-            @foreach($extras as $ekskul)
+            @foreach($ekskuls as $ekskul)
             <div class="group relative">
                 <div class="absolute inset-0 bg-[#48c3d9] rounded-[2.5rem] translate-x-2 translate-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10"></div>
                 
