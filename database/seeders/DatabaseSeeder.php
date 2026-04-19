@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -11,139 +9,154 @@ use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         // =========================
-        // User
+        // USERS
         // =========================
-        DB::table('users')->insert([
+        // DB::table('users')->insert([
+        //     [
+        //         'name' => 'Administrator',
+        //         'email' => 'admin@gmail.com',
+        //         'password' => Hash::make('password'),
+        //         'role' => 'admin',
+        //         'created_at' => now(),
+        //         'updated_at' => now()
+        //     ],
+        //     [
+        //         'name' => 'Editor',
+        //         'email' => 'editor@gmail.com',
+        //         'password' => Hash::make('password'),
+        //         'role' => 'editor',
+        //         'created_at' => now(),
+        //         'updated_at' => now()
+        //     ]
+        // ]);
+
+        // =========================
+        // ADMINISTRATORS
+        // =========================
+        DB::table('administrators')->insert([
             [
-                'name' => 'Administrator',
-                'role' => 'admin',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('password'),
+                'name' => 'Ahmad Suryanto',
+                'role' => 'pengurus',
+                'keterangan' => 'Kepala Sekolah',
+                'nip' => '196505121990031002',
+                'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Editor',
-                'role' => 'editor',
-                'email' => 'editor@gmail.com',
-                'password' => Hash::make('password'),
+                'name' => 'Sri Wahyuni',
+                'nip' => '198377992109320003',
+                'role' => 'guru',
+                'keterangan' => 'Guru IPA',
+                'is_active' => true,
                 'created_at' => now(),
                 'updated_at' => now()
             ]
         ]);
+
         // =========================
-        // SCHOOL PROFILE
+        // EKSKULS
         // =========================
-        DB::table('school_profiles')->insert([
-            'school_name' => 'SMAN 1 TAWANGSARI',
-            'address' => 'Jl. Raya Tawangsari No. 1',
-            'phone' => '08123456789',
-            'email' => 'info@sman1.sch.id',
-            'logo' => 'logo/logo.png',
-            'vision' => 'Menjadi sekolah unggul dan berprestasi',
-            'mission' => 'Meningkatkan kualitas pendidikan dan karakter siswa',
-            'motto' => 'Disiplin, Cerdas, Berakhlak',
-            'yelyel' => 'SMANSA... Jaya!',
-            'mars' => 'Mars SMAN 1 Tawangsari...',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        // =========================
-        // SUBJECTS
-        // =========================
-        $subjects = [
-            'Matematika',
-            'Bahasa Indonesia',
-            'Bahasa Inggris',
-            'Fisika',
-            'Kimia',
-            'Biologi'
-        ];
-        foreach ($subjects as $subject) {
-            DB::table('subjects')->insert([
-                'name' => $subject,
-                'description' => 'Pelajaran ' . $subject,
+        $ekskuls = ['Pramuka', 'Futsal', 'Basket', 'PMR'];
+
+        foreach ($ekskuls as $ekskul) {
+            DB::table('ekskuls')->insert([
+                'name' => $ekskul,
+                'slug' => Str::slug($ekskul),
+                'description' => 'Ekskul ' . $ekskul,
+                'pembina' => 'Pembina ' . $ekskul,
+                'instagram' => null,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
         }
-        // =========================
-        // TEACHERS
-        // =========================
-        for ($i = 1; $i <= 6; $i++) {
-            DB::table('teachers')->insert([
-                'name' => 'Guru ' . $i,
-                'nip' => '1987654321' . $i,
-                'subject_id' => $i,
-                'position' => 'Guru',
-                'bio' => 'Guru berpengalaman di bidangnya',
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-        }
+
         // =========================
         // NEWS
         // =========================
         for ($i = 1; $i <= 5; $i++) {
             DB::table('news')->insert([
-                'title' => 'Berita Sekolah ' . $i,
+                'news_title' => 'Berita Sekolah ' . $i,
                 'slug' => Str::slug('Berita Sekolah ' . $i),
-                'content' => 'Ini adalah isi berita ke-' . $i,
+                'content' => '<p>Isi berita ke-' . $i . '</p>',
                 'thumbnail' => 'news/default.jpg',
                 'status' => 'publish',
                 'published_at' => now(),
                 'author_id' => 1,
-                'views' => rand(10, 100),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
         }
+
         // =========================
-        // EXTRACURRICULARS
+        // ACADEMICS
         // =========================
-        $extras = ['Pramuka', 'Futsal', 'Basket', 'PMR'];
-        foreach ($extras as $extra) {
-            DB::table('extracurriculars')->insert([
-                'name' => $extra,
-                'description' => 'Ekstrakurikuler ' . $extra,
-                'image' => 'extras/default.jpg',
+        DB::table('academics')->insert([
+            [
+                'event_name' => 'Ujian Tengah Semester',
+                'description' => 'UTS Semester Genap',
+                'start_date' => '2026-05-01',
+                'end_date' => '2026-05-07',
+                'academic_year' => '2026/2027',
+                'status' => 'mendatang',
                 'created_at' => now(),
                 'updated_at' => now()
-            ]);
-        }
+            ]
+        ]);
+
+        // =========================
+        // FASILITAS
+        // =========================
+        DB::table('fasilitas')->insert([
+            [
+                'fasilitas_name' => 'Laboratorium Komputer',
+                'fasilitas_desc' => 'Lab dengan komputer lengkap',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'fasilitas_name' => 'Perpustakaan',
+                'fasilitas_desc' => 'Koleksi buku lengkap',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ]);
+
         // =========================
         // ACHIEVEMENTS
         // =========================
-        for ($i = 1; $i <= 5; $i++) {
-            DB::table('achievements')->insert([
-                'title' => 'Juara ' . $i,
-                'level' => 'Kabupaten',
-                'year' => 2020 + $i,
-                'image' => 'achievements/default.jpg',
-                'description' => 'Prestasi ke-' . $i,
+        DB::table('achievements')->insert([
+            [
+                'title' => 'Juara 1 Olimpiade',
+                'content' => 'Prestasi tingkat nasional',
+                'date' => '2025-08-01',
+                'kategori' => 'akademik',
                 'created_at' => now(),
                 'updated_at' => now()
-            ]);
-        }
+            ]
+        ]);
+
         // =========================
-        // GALLERIES
+        // ALUMNI
         // =========================
-        for ($i = 1; $i <= 6; $i++) {
-            DB::table('galleries')->insert([
-                'title' => 'Galeri ' . $i,
-                'image' => 'gallery/default.jpg',
-                'category' => 'Kegiatan',
+        DB::table('alumni')->insert([
+            [
+                'alumni_name' => 'Andi Pratama',
+                'story' => 'Sekarang kuliah di ITB',
+                'graduate_at' => 2022,
                 'created_at' => now(),
                 'updated_at' => now()
-            ]);
-        }
+            ],
+            [
+                'alumni_name' => 'Siti Aisyah',
+                'story' => 'Bekerja di perusahaan teknologi',
+                'graduate_at' => 2021,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ]);
     }
 }

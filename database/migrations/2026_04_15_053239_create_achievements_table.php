@@ -9,14 +9,11 @@ return new class extends Migration {
     {
         Schema::create('achievements', function (Blueprint $table) {
             $table->id();
-
+            $table->string('achiev_image')->nullable();
             $table->string('title');
-            $table->string('level')->nullable(); // kabupaten, provinsi, nasional
-            $table->year('year')->nullable();
-
-            $table->string('image')->nullable(); // storage/achievements/xxx.jpg
-            $table->text('description')->nullable();
-
+            $table->text('content')->nullable();
+            $table->date('date');
+            $table->enum('kategori', ['akademik','non_akademik']);
             $table->timestamps();
         });
     }

@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -130,7 +129,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('ekstrakurikuler') }}" class="nav-text text-[13px] text-gray-900 hover:text-[var(--primary)] transition-colors">Ekstrakurikuler</a>
+                <a href="{{ route('ekskul') }}" class="nav-text text-[13px] text-gray-900 hover:text-[var(--primary)] transition-colors">Ekskul</a>
                 <a href="#" class="nav-text text-[13px] text-gray-900 hover:text-[var(--primary)] transition-colors">Berita</a>
 
                 <a href="#" class="ml-4 bg-[var(--primary)] hover:bg-gray-900 text-white text-[11px] px-6 py-3 rounded-full font-black uppercase tracking-widest transition-all duration-300 shadow-lg shadow-gray-200 hover:shadow-[var(--primary)]/40 active:scale-95">
@@ -179,7 +178,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('ekstrakurikuler') }}" class="p-4 font-bold text-gray-700">Ekstrakurikuler</a>
+                <a href="{{ route('ekskul') }}" class="p-4 font-bold text-gray-700">Ekskul</a>
                 <a href="#" class="p-4 font-bold text-gray-700">Berita</a>
                 <a href="#" class="p-4 font-bold text-gray-700 text-[var(--primary)] uppercase tracking-widest text-xs border-2 border-[var(--primary)] rounded-2xl text-center">Info PPDB 2026</a>
             </div>

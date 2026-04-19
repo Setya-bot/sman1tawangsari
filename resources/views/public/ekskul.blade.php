@@ -1,6 +1,6 @@
 @extends('public.layouts.main')
 
-@section('title', 'Ekstrakurikuler - SMA Negeri 1 Tawangsari')
+@section('title', 'Ekskul - SMA Negeri 1 Tawangsari')
 
 @section('content')
 
@@ -16,7 +16,7 @@
                     Pengembangan Diri
                 </span>
                 <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
-                    Ekstrakurikuler
+                    Ekskul
                 </h1>
                 <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed border-l-4 border-[#48c3d9] pl-6 border-l-4 border-[#48c3d9] pl-6">
                     Pilih kegiatan sesuai minat dan bakat untuk mengembangkan potensi diri siswa
@@ -41,18 +41,15 @@
             <div class="group relative">
                 <div class="absolute inset-0 bg-[#48c3d9] rounded-[2.5rem] translate-x-2 translate-y-2 opacity-0 group-hover:opacity-100 transition-all duration-300 -z-10"></div>
                 
-                <a href="{{ route('ekstrakurikuler.detail', $ekskul->id) }}"
+                <a href="{{ route('ekskul.detail', $ekskul->id) }}"
                 class="relative h-full bg-white border border-gray-100 rounded-[2.5rem] p-10 hover:border-[#48c3d9] transition-all duration-300 block overflow-hidden shadow-sm hover:shadow-2xl">
                     
                     <div class="relative w-20 h-20 mb-8">
                         <div class="absolute inset-0 bg-[#48c3d9]/10 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform"></div>
-                        <div class="absolute inset-0 bg-[#48c3d9] rounded-2xl flex items-center justify-center text-4xl shadow-lg shadow-[#48c3d9]/20">
-                             {{-- Placeholder Icon (Bisa disesuaikan per kategori) --}}
-                             @php
-                                $icons = ['🏆', '🎨', '⚽', '🎷', '💻', '🏹'];
-                                $randomIcon = $icons[array_rand($icons)];
-                             @endphp
-                             {{ $randomIcon }}
+                        <div class="absolute inset-0 rounded-2xl flex items-center justify-center text-4xl shadow-lg shadow-[#48c3d9]/20">
+                             <img src="{{ $ekskul->image_url ?? 'https://source.unsplash.com/600x400/?activity' }}"
+                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                     alt="{{ $ekskul->name }}">
                         </div>
                     </div>
 
@@ -90,8 +87,8 @@
                 <div class="w-full md:w-2/3 text-center md:text-left">
                     <h3 class="text-3xl font-black text-gray-900 mb-6 uppercase tracking-tight">Informasi Pendaftaran</h3>
                     <p class="text-gray-600 text-lg leading-relaxed mb-8">
-                        Pendaftaran ekstrakurikuler dibuka pada <span class="font-bold text-gray-900">Masa Pengenalan Lingkungan Sekolah (MPLS)</span>. 
-                        Sesuai kurikulum nasional, <span class="text-[#48c3d9] font-bold">Pramuka merupakan ekstrakurikuler wajib</span> bagi seluruh siswa kelas X.
+                        Pendaftaran ekskul dibuka pada <span class="font-bold text-gray-900">Masa Pengenalan Lingkungan Sekolah (MPLS)</span>. 
+                        Sesuai kurikulum nasional, <span class="text-[#48c3d9] font-bold">Pramuka merupakan ekskul wajib</span> bagi seluruh siswa kelas X.
                     </p>
                     <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                         <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-xl border border-gray-100">

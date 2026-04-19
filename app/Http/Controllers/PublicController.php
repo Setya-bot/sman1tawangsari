@@ -36,14 +36,14 @@ class PublicController extends Controller
         return view('public.studentship');
     }
 
-    public function ekstrakurikuler()
+    public function ekskul()
     {
         $ekskuls = Ekskul::latest()->get();
 
-        return view('public.ekstrakurikuler', compact('ekskuls'));
+        return view('public.ekskul', compact('ekskuls'));
     }
 
-    public function detailEkstrakurikuler($id)
+    public function detailEkskul($id)
     {
         $profile = SchoolProfile::first();
 
@@ -54,7 +54,7 @@ class PublicController extends Controller
                     ->take(3)
                     ->get();
 
-        return view('public.ekstrakurikuler_detail', compact('profile', 'ekskul', 'others'));
+        return view('public.ekskul_detail', compact('profile', 'ekskul', 'others'));
     }
 
     public function academic()

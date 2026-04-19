@@ -139,7 +139,7 @@ body {
 }
 
 .main-content {
-    margin-left: 280px;
+    margin-left: 260px; /* INI Masih Bug */
     min-height: 100vh;
     background-color: #f8fafc;
     padding: 30px 30px 30px 30px;
@@ -326,12 +326,6 @@ table tr {
 
 .admin-sidebar.collapsed #sidebarToggle {
     transform: rotate(180deg); /* Balik arah panah */
-}
-
-/* Update Main Content agar mengikuti Sidebar */
-.main-content {
-    margin-left: 280px; /* Default lebar sidebar kamu */
-    transition: margin-left 0.4s ease;
 }
 
 .main-content.sidebar-collapsed {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ekskul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class EkskulController extends Controller
 {
@@ -34,24 +35,28 @@ class EkskulController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'image' => 'nullable|image|max:2048'
+            'name'      => 'required|max:100',
+            'image'     => 'nullable|image|max:2048',
+            'pembina'   => 'nullable|max:100',
+            'instagram' => 'nullable'
         ]);
 
         $imagePath = null;
-
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('ekskuls', 'public');
         }
 
         Ekskul::create([
-            'name' => $request->name,
+            'name'        => $request->name,
+            'slug'        => Str::slug($request->name), // Generate slug otomatis
             'description' => $request->description,
-            'image' => $imagePath
+            'pembina'     => $request->pembina,
+            'instagram'   => $request->instagram,
+            'image'       => $imagePath
         ]);
 
         return redirect()->route('ekskuls.index')
-            ->with('success', 'Data berhasil ditambahkan');
+            ->with('success', 'Data ekskul berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -65,35 +70,45 @@ class EkskulController extends Controller
         $ekskul = Ekskul::findOrFail($id);
 
         $request->validate([
-            'name' => 'required',
-            'image' => 'nullable|image|max:2048'
+            'name'      => 'required|max:100',
+            'image'     => 'nullable|image|max:2048',
+            'pembina'   => 'nullable|max:100',
+            'instagram' => 'nullable'
         ]);
 
-        if ($request->hasFile('image')) {
+        $imagePath = $ekskul->image; // Gunakan gambar lama secara default
 
-            // hapus gambar lama
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
             if ($ekskul->image && Storage::disk('public')->exists($ekskul->image)) {
                 Storage::disk('public')->delete($ekskul->image);
             }
-
-            $ekskul->image = $request->file('image')->store('ekskuls', 'public');
+            $imagePath = $request->file('image')->store('ekskuls', 'public');
         }
 
         $ekskul->update([
-            'name' => $request->name,
+            'name'        => $request->name,
+            'slug'        => Str::slug($request->name), // Update slug jika nama berubah
             'description' => $request->description,
-            'image' => $ekskul->image
+            'pembina'     => $request->pembina,
+            'instagram'   => $request->instagram,
+            'image'       => $imagePath
         ]);
 
         return redirect()->route('ekskuls.index')
-            ->with('success', 'Data berhasil diupdate');
+            ->with('success', 'Data ekskul berhasil diupdate');
     }
 
     public function destroy(Ekskul $ekskul)
     {
+        // Hapus file gambar dari storage sebelum hapus data
+        if ($ekskul->image && Storage::disk('public')->exists($ekskul->image)) {
+            Storage::disk('public')->delete($ekskul->image);
+        }
+
         $ekskul->delete();
 
         return redirect()->route('ekskuls.index')
-            ->with('success', 'Data berhasil dihapus');
+            ->with('success', 'Data ekskul berhasil dihapus');
     }
 }

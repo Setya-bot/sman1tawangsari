@@ -9,23 +9,13 @@ return new class extends Migration {
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-
-            $table->string('title');
+            $table->string('news_title');
             $table->string('slug')->unique();
-            $table->longText('content');
-
-            $table->string('thumbnail')->nullable(); // storage/news/xxx.jpg
-
-            $table->enum('status', ['draft', 'publish'])->default('draft');
-            $table->timestamp('published_at')->nullable();
-
-            $table->foreignId('author_id')
-                  ->nullable()
-                  ->constrained('users')
-                  ->nullOnDelete();
-
-            $table->integer('views')->default(0);
-
+            $table->string('thumbnail')->nullable();
+            $table->longText('content')->nullable();
+            $table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->enum('status', ['draft','publish'])->default('draft');
+            $table->dateTime('published_at')->nullable();
             $table->timestamps();
         });
     }

@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('fasilitas', function (Blueprint $table) {
+            $table->id();
+            $table->string('fasilitas_image')->nullable();
+            $table->string('fasilitas_name', 100);
+            $table->text('fasilitas_desc')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('fasilitas');
+    }
+};

@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Edit Ekstrakurikuler')
+@section('title', 'Edit Ekskul')
 
 @section('content')
 <div class="pt-3 max-w-8xl mx-auto">
@@ -12,10 +12,10 @@
         @method('PUT')
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <!-- Nama Ekstrakurikuler -->
+            <!-- Nama Ekskul -->
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Nama Ekstrakurikuler <span class="text-red-500">*</span>
+                    Nama Ekskul <span class="text-red-500">*</span>
                 </label>
                 <input type="text" name="name" value="{{ old('name', $ekskul->name) }}" required
                     class="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#48c3d9] focus:ring-1 focus:ring-[#48c3d9]">
@@ -24,7 +24,7 @@
             <!-- Gambar -->
             <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-3">
-                    Gambar Ekstrakurikuler
+                    Gambar Ekskul
                 </label>
 
                 <div onclick="document.getElementById('imageInput').click()" 
@@ -55,7 +55,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
                 <textarea name="description" rows="6" 
                     class="w-full px-5 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:border-[#48c3d9]"
-                    placeholder="Deskripsikan kegiatan ekstrakurikuler ini...">{{ old('description', $ekskul->description) }}</textarea>
+                    placeholder="Deskripsikan kegiatan ekskul ini...">{{ old('description', $ekskul->description) }}</textarea>
             </div>
 
         </div>
@@ -92,7 +92,7 @@ document.getElementById('imageInput').onchange = function(e) {
 // SweetAlert Submit
 document.getElementById('btnSubmit').onclick = function() {
     Swal.fire({
-        title: 'Update data ekstrakurikuler?',
+        title: 'Update data ekskul?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#48c3d9',

@@ -9,9 +9,7 @@ class Ekskul extends Model
     protected $table = 'ekskuls';
 
     protected $fillable = [
-        'name',
-        'description',
-        'image',
+        'name', 'slug', 'image', 'description', 'pembina', 'instagram'
     ];
 
     public function getImageUrlAttribute()

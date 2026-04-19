@@ -50,7 +50,7 @@ CREATE TABLE news (
     slug VARCHAR(255) UNIQUE,
     thumbnail VARCHAR(255),
     content LONGTEXT,
-    author_id BIGINT,
+    author_id BIGINT NULL,
     status ENUM('draft','publish') DEFAULT 'draft',
     published_at DATETIME NULL,
     created_at TIMESTAMP NULL,

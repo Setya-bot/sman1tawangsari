@@ -36,7 +36,7 @@
                 @elseif($slug == 'perpustakaan')
                     <p>Perpustakaan kami memiliki koleksi lebih dari 15.000 buku fisik dan ribuan e-book serta jurnal online. Ruang baca yang nyaman dan akses digital membuat siswa semakin gemar membaca dan mencari referensi.</p>
                 @elseif($slug == 'olahraga')
-                    <p>Lapangan olahraga kami mencakup lapangan basket, voli, futsal, dan lintasan atletik dengan standar nasional. Fasilitas ini mendukung kegiatan ekstrakurikuler olahraga siswa.</p>
+                    <p>Lapangan olahraga kami mencakup lapangan basket, voli, futsal, dan lintasan atletik dengan standar nasional. Fasilitas ini mendukung kegiatan ekskul olahraga siswa.</p>
                 @elseif($slug == 'ruang-kelas')
                     <p>36 ruang kelas ber-AC dengan LCD projector, sound system, dan smart board untuk mendukung pembelajaran interaktif dan nyaman.</p>
                 @elseif($slug == 'aula')
